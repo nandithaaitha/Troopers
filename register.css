@@ -47,7 +47,6 @@ h2 {
     font-size: 36px;
     margin-bottom: 20px;
     text-align: center; 
-    
 }
 
 .input-group {
@@ -75,21 +74,24 @@ input {
     border: 3px solid #000;
     border-radius: 5px;
     background-color: #c6e0f5;
-    padding-right: 40px;
+    padding-right: 40px; /* Space for the eye icon */
 }
 
-input[type="password"] {
-    width: 100%;
-}
-
-.icon {
+/* Eye icon positioning */
+.input-wrapper .icon {
     position: absolute;
     top: 50%;
+    right: 10px; /* Align icon to the right */
     transform: translateY(-50%);
+    cursor: pointer;
     color: #007bff;
-    left: 10px;
 }
 
+.input-wrapper .icon:hover {
+    color: #0056b3;
+}
+
+/* Register button styling */
 .register-btn {
     background-color: #0a4db1;
     color: white;
