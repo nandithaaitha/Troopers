@@ -21,7 +21,6 @@ body {
     position: relative;
 }
 
-
 .background-image {
     background-image: url('./img/image.png');
     background-size: contain;
@@ -54,7 +53,7 @@ h2 {
     margin-bottom: 10px;
 }
 
-.google-btn{
+.google-btn, .facebook-btn {
     background-color: #fff;
     color: #333;
     padding: 10px;
@@ -65,25 +64,13 @@ h2 {
     cursor: pointer;
     font-size: 16px;
 }
+
 .fa-google {
     background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     -webkit-text-fill-color: transparent;
-}
-
-
-.facebook-btn {
-    background-color: #fff;
-    color: #333;
-    padding: 10px;
-    border: none;
-    border-radius: 10px;
-    border: 3px solid #000;
-    width: 48%;
-    cursor: pointer;
-    font-size: 16px;
 }
 
 .google-btn i, .facebook-btn i {
@@ -112,6 +99,7 @@ h2 {
 
 .input-wrapper {
     position: relative;
+    width: 100%;
 }
 
 label {
@@ -128,24 +116,23 @@ input {
     border: none;
     border-radius: 5px;
     background-color: #c6e0f5;
-    padding-right: 40px;
+    padding-right: 40px; /* Space for the eye icon */
 }
 
 .icon {
     position: absolute;
     top: 50%;
+    right: 10px; /* Align icon to the right */
     transform: translateY(-50%);
+    cursor: pointer;
     color: #007bff;
 }
 
-.email-icon {
-    left: 10px;
+.icon:hover {
+    color: #0056b3;
 }
 
-.password-icon {
-    left: 10px;
-}
-
+/* Additional styling for buttons */
 .login-btn {
     background-color: #0a4db1;
     color: white;
@@ -155,6 +142,7 @@ input {
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
+    margin-top: 20px;
 }
 
 .login-btn i {
