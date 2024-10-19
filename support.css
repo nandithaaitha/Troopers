@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.sticky-top{
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+.navbar-brand{
+    color: #000;
+}
+.fa-bars{
+    color: #fff;
+}
+.navbar{
+    background-color: orange;
+}
+.nav-link{
+    color: #000;
+}
+.nav-link.active {
+    color: red !important;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; 
+    width: 350px;
+    height: 600px;
+    margin-top: 2rem;
+}
+
+.box {
+    background-color: whitesmoke;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 550px;
+    height: 470px;
+    padding-top: 20px; /* Add some padding from the top */
+}
+
+.titleSupport {
+    width: 78%;
+    margin-top: 5rem;
+    margin-left: 20%;
+}
+
+.titleSupport h2 {
+    font-size: 20px;
+    color: #ff4c4c;
+}
+
+.titleSupport .subTitleSupport {
+    font-size: 24px;
+    width: 290px;
+    height: 60px;
+    color: black;
+    font-weight: 600;
+}
+
+.titleSupport .contentSupport {
+    color: black;
+    font-size: 15px;
+    width: 426px;
+}
+
+.subBox {
+    width: 70%; /* Make subBox take full width */
+    height: 80px;
+    background-color: #fff;
+    margin-top: 10px; 
+    border-radius: 10px;
+    padding: 10px 15px;
+}
+.subBoxtitle{
+    font-weight: 550;
+    color: #000;
+}
+.subBoxContact{
+    color: #ff4c4c;
+}
+
+
+footer {
+    position: fixed;
+    bottom: 5px;
+    right: 20px;
+}
+
+.contact-icon {
+    background-color: #ff4c4c;
+    padding: 15px;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.5rem;
+    margin-top: 20px;
+}
+

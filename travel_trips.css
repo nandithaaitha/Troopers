@@ -1,0 +1,95 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+.navbar-brand{
+    color: #000;
+}
+.fa-bars{
+    color: #fff;
+}
+.navbar{
+    background-color: orange;
+}
+.nav-link{
+    color: #000;
+}
+.nav-link.active {
+    color: red !important;
+}
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    color: white;
+    padding: 2rem;
+    height: 38rem;
+    position: relative;
+}
+
+.hero-text {
+    max-width: 50%;
+}
+
+.hero-text h1 {
+    font-size: 40px;
+    margin-bottom: 1rem;
+    position: absolute;
+    top: 20%;
+    /* right: 38%; */
+    margin-left: 38%;
+    color: #203089; 
+    width: 305px;
+    height: 47px;
+}
+
+.hero-text p {
+    font-size: 16px;
+    font-weight: 150;
+    margin-bottom: 2rem;
+    position: absolute;
+    top: 35%;
+    /* right: 5%; */
+    color: #000;
+    margin-left: 38%;
+    width: 446px;
+    height: 76px;
+    
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 10px;
+    margin-left: 17%;
+    position: absolute;
+    top: 80%;
+    left: -11%;
+}
+
+.hero-image img {
+    max-width: 100%;
+    width: 30rem;
+    height: auto;
+}
+
+footer {
+    position: fixed;
+    bottom: 5px;
+    right: 20px;
+}
+
+.contact-icon {
+    background-color: #ff4c4c;
+    padding: 15px;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.5rem;
+    margin-top: 20px;
+}
+
