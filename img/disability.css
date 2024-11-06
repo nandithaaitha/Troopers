@@ -1,0 +1,106 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+/* ============================== */
+body.light-mode {
+    background-color: #f4f7fc;
+    color: #333;
+}
+body.light-mode .card{
+    background-color: #000;
+}
+body.light-mode .card-title{
+    border-bottom: 1px solid #fff;
+    padding-bottom: 1rem;
+}
+body.light-mode .card-title,
+body.light-mode .card-title .card-text{
+    color: #fff;
+}
+
+body.light-mode .card-text,
+body.light-mode li,
+body.light-mode li i{
+    color: #fff;
+}
+body.light-mode h2{
+    color: green;
+
+}
+
+
+body.dark-mode {
+    background-color: #121212;
+    color: #f0f0f0;
+}
+body.dark-mode .card-title,
+body.dark-mode .card-title .card-text{
+    color: #000;
+}
+body.dark-mode h2,
+body.dark-mode .card-text,
+body.dark-mode li,
+body.dark-mode li i{
+    color: #000;
+}
+
+/* ============================= */
+.navbar-brand{
+    color: #000;
+}
+.fa-bars{
+    color: #fff;
+}
+.navbar{
+    background-color: orange;
+}
+.nav-link{
+    color: #000;
+}
+.nav-link.active {
+    color: red !important;
+}
+
+.card{
+    width: 700px; 
+    height: auto; 
+    display: block; 
+    margin: auto; 
+    margin-top: 5rem;
+    border-radius: 10px;
+    box-shadow: 1px 2px 2px 1px lightgray
+}
+
+
+.card-title{
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 1px solid #000;
+    padding-bottom: 1rem;
+    text-align: center;
+}
+.card-text{
+    font-size: 16px;
+}
+
+footer {
+    position: fixed;
+    bottom: 5px;
+    right: 20px;
+}
+
+.contact-icon {
+    background-color: #ff4c4c;
+    padding: 15px;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.5rem;
+    margin-top: 20px;
+}
+

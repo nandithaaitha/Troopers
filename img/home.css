@@ -1,0 +1,251 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* ============================ */
+/* Default Light Mode */
+body.light-mode .hero {
+    background-color: #fff;
+    color: #000;
+}
+
+body.dark-mode .hero {
+    background-color: #333;
+    color: #fff;
+}
+
+/* Buttons */
+body.light-mode .btn1, body.light-mode .btn2 {
+    background-color: white;
+    color: green;
+}
+
+body.dark-mode .btn1, body.dark-mode .btn2 {
+    background-color: darkgray;
+    color: white;
+}
+body.dark-mode .hero-text h1{
+    color: green;
+}
+
+body.dark-mode .hero-text p{
+    color: white;
+}
+
+/* ============================ */
+
+.navbar-brand{
+    color: #000;
+}
+.fa-bars{
+    color: #fff;
+}
+.navbar{
+    background-color: orange;
+}
+.nav-link{
+    color: #000;
+}
+.nav-link.active {
+    color: red !important;
+}
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    color: white;
+    padding: 2rem;
+    height: 38rem;
+    position: relative;
+}
+
+.hero-text {
+    width: 887px;
+    height: 530px;
+}
+
+.hero-text h1 {
+    font-size: 64px;
+    margin-bottom: 1rem;
+    position: absolute;
+    top: 20%;
+    left: 5%;
+    color: #203089;
+    
+    
+}
+
+.hero-text p {
+    font-size: 20px;
+    font-weight: 350;
+    margin-bottom: 2rem;
+    position: absolute;
+    top: 45%;
+    left: 5%;
+    
+    color: #000;
+}
+
+
+.cta-buttons {
+    display: flex;
+    gap: 10px;
+    margin-left: 17%;
+    position: absolute;
+    top: 65%;
+    left: -11%;
+    width: 344px;
+    height: 56px;
+    text-decoration: none;
+}
+
+.btn1 {
+    background-color: #fff; 
+    width: 175px;
+    height: 56px;
+    color: green;
+    border-radius: 8px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    border: 2px solid green; 
+    text-decoration: none; 
+    font-size: 16px;
+    /* transition: background-color 0.3s, color 0.3s; */
+}
+
+.btn1:hover {
+   
+    color: green; 
+    text-decoration: none;
+}
+
+.btn2 {
+    background-color: #1443BD;
+    width: 175px; 
+    height: 56px;
+    color: #fff; 
+    border-radius: 8px; 
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    border: 2px solid #1443BD; 
+    text-decoration: none; 
+    font-size: 16px; 
+    transition: background-color 0.3s, color 0.3s; 
+}
+
+.btn2:hover {
+    background-color: #0f2a7e;
+    color: #fff; 
+    text-decoration: none;
+}
+
+.fa-solid{
+    margin-left: 20px;
+}
+.hero-image img {
+    max-width: 100%;
+    width: 30rem;
+    height: auto;
+}
+
+.advertisement-carousel {
+    margin-top: 2rem;
+    padding: 2rem;
+    background-color: #f9f9f9;
+}
+
+.advertisement-carousel h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.carousel-item {
+    position: relative;
+}
+
+.carousel-item img {
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.carousel-caption {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Darker overlay */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    padding: 2rem;
+}
+
+.university-logo {
+    width: 80px;
+    height: auto;
+    margin-bottom: 1rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.carousel-caption h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.carousel-caption p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+.carousel-caption .btn-primary {
+    padding: 12px 24px;
+    background-color: #ffc107;
+    border: none;
+    color: #333;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.carousel-caption .btn-primary:hover {
+    background-color: #e0a800;
+}
+
+/* Controls */
+.carousel-control-prev, .carousel-control-next {
+    filter: invert(80%);
+    opacity: 0.7;
+}
+
+footer {
+    position: fixed;
+    bottom: 5px;
+    right: 20px;
+}
+
+.contact-icon {
+    background-color: #ff4c4c;
+    padding: 15px;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.5rem;
+    margin-top: 20px;
+}
+

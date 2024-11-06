@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travel Planner</title>
+    <!-- Bootstrap CDN -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="travel_trips.css" />
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <script>
+      $(function () {
+        $("#nav-placeholder").load("navbar.html");
+      });
+    </script>
+  </head>
+  <body>
+    <!-- Bootstrap Navbar -->
+
+    <div id="nav-placeholder"></div>
+    <main>
+      <section class="hero">
+        <div class="hero-text">
+          <div class="hero-image">
+            <img src="./img/about.png" alt="Travel Planner" />
+          </div>
+          <h1>About</h1>
+          <p>
+            A person with a disability has a physical or mental impairment that
+            limits their ability to perform major life activities. Disabilities
+            can include sensory impairments, intellectual and developmental
+            disabilities, and more. People with disabilities are twice as likely
+            to develop conditions like depression, asthma, diabetes, stroke,
+            obesity, or poor oral health. They may also die up to 20 years
+            earlier than people without disabilities.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="contact-icon">
+        <i class="fas fa-phone"></i>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- <script>
+      document.querySelectorAll(".nav-link").forEach((link) => {
+        link.addEventListener("click", function () {
+          document.querySelector(".nav-link.active").classList.remove("active");
+          this.classList.add("active");
+        });
+      });
+    </script> -->
+  </body>
+</html>

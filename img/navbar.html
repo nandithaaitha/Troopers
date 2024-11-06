@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travel Planner</title>
+    <!-- Bootstrap CDN -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="navbar.css" />
+  </head>
+  <body>
+    <!-- Bootstrap Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning sticky-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"><i class="fa-solid fa-bars"></i></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="home.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="travel_trips.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="select_disability.html"
+                >Disability Preference</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="feedback.html">Feedback</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="support.html">Support</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="disability.html">Health</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="blogs.html">Blogs</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="faq.html">FAQ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="wishlist.html">Wishlist</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="admin.html">Admin</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="profile.html">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="logoutBtn">Logout</a>
+            </li>
+
+            <!-- Add Light/Dark Mode Toggle Button -->
+            <li class="nav-item">
+              <button id="theme-toggle" class="btn btn-outline-dark">
+                Dark Mode
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Logout Confirmation Modal -->
+    <div
+      class="modal fade"
+      id="logoutModal"
+      tabindex="-1"
+      aria-labelledby="logoutModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="logoutModalLabel">
+              <i class="fas fa-sign-out-alt"></i> Confirm Logout
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">Are you sure you want to log out?</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button type="button" class="btn btn-danger" id="confirmLogoutBtn">
+              Yes, Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Add 'active' class to the current link
+      const currentLocations = location.href;
+      const navLink = document.querySelectorAll(".nav-link");
+      navLink.forEach((link) => {
+        if (link.href === currentLocations) {
+          link.classList.add("active");
+        }
+      });
+    </script>
+
+    <script>
+      const themeToggle = document.getElementById("theme-toggle");
+      const body = document.body;
+
+      // Check saved theme in localStorage
+      const savedTheme = localStorage.getItem("theme") || "light";
+      setTheme(savedTheme);
+
+      themeToggle.addEventListener("click", () => {
+        const currentTheme = body.classList.contains("dark-mode")
+          ? "light"
+          : "dark";
+        setTheme(currentTheme);
+      });
+
+      function setTheme(theme) {
+        if (theme === "dark") {
+          body.classList.add("dark-mode");
+          body.classList.remove("light-mode");
+          themeToggle.textContent = "Light Mode";
+          themeToggle.classList.replace(
+            "btn-outline-dark",
+            "btn-outline-light"
+          );
+          localStorage.setItem("theme", "dark");
+        } else {
+          body.classList.add("light-mode");
+          body.classList.remove("dark-mode");
+          themeToggle.textContent = "Dark Mode";
+          themeToggle.classList.replace(
+            "btn-outline-light",
+            "btn-outline-dark"
+          );
+          localStorage.setItem("theme", "light");
+        }
+      }
+    </script>
+
+    <script>
+      // Add 'active' class to the current link
+      const currentLocation = location.href;
+      const navLinks = document.querySelectorAll(".nav-link");
+      navLinks.forEach((link) => {
+        if (link.href === currentLocation) {
+          link.classList.add("active");
+        }
+      });
+
+      // Logout functionality
+      document
+        .getElementById("logoutBtn")
+        .addEventListener("click", function (event) {
+          event.preventDefault();
+          $("#logoutModal").modal("show");
+        });
+
+      document
+        .getElementById("confirmLogoutBtn")
+        .addEventListener("click", function () {
+          window.location.href = "login.html"; // Redirect to login page
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

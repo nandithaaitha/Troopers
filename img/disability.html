@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travel Planner</title>
+    <!-- Bootstrap CDN -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="disability.css" />
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+      $(function () {
+        $("#nav-placeholder").load("navbar.html");
+      });
+    </script>
+  </head>
+  <body>
+    <div id="nav-placeholder"></div>
+    <main>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">
+            Disability and Health Information for People with Disabilities
+          </h5>
+
+          <div>
+            <h2>Health Details</h2>
+            <p class="card-text">
+              <span>
+                People with disabilities experience many health inequities,
+                including a higher risk of developing conditions like
+                depression, asthma, diabetes, stroke, obesity, and poor oral
+                health.
+              </span>
+            </p>
+            <h2>Contact Details</h2>
+            <ul class="list-unstyled">
+              <li><i class="fas fa-phone-alt"></i> Phone: +123 456 7890</li>
+              <li>
+                <i class="fas fa-envelope"></i> Email: contact@example.com
+              </li>
+              <li>
+                <i class="fas fa-map-marker-alt"></i> Address: 123 Main St,
+                Anytown, USA
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="contact-icon">
+        <i class="fas fa-phone"></i>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
