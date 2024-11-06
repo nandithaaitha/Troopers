@@ -52,15 +52,53 @@ const db = getFirestore(app);
 const storage = getStorage(app);
 
 // Function to display messages
+// function showMessage(message, divId, isError = false) {
+//   const messageDiv = document.getElementById(divId);
+//   if (messageDiv) {
+//     messageDiv.style.display = "block";
+//     messageDiv.innerHTML = message;
+//     messageDiv.style.opacity = 1;
+//     messageDiv.style.color = isError ? "red" : "green"; // Change color based on error
+//     setTimeout(() => {
+//       messageDiv.style.opacity = 0;
+//     }, 5000);
+//   } else {
+//     console.error(`Element with ID ${divId} not found.`);
+//   }
+// }
+
+// =================================
+// function showMessage(message, divId, isError = false) {
+//   const messageDiv = document.getElementById(divId);
+//   if (messageDiv) {
+//     messageDiv.style.display = "block";
+//     messageDiv.innerHTML = message;
+//     messageDiv.classList.remove("alert-success", "alert-danger");
+//     messageDiv.classList.add(isError ? "alert-danger" : "alert-success");
+
+//     setTimeout(() => {
+//       messageDiv.style.display = "none";
+//     }, 5000);
+//   } else {
+//     console.error(`Element with ID ${divId} not found.`);
+//   }
+// }
+
+// ================================
+
 function showMessage(message, divId, isError = false) {
   const messageDiv = document.getElementById(divId);
   if (messageDiv) {
-    messageDiv.style.display = "block";
-    messageDiv.innerHTML = message;
-    messageDiv.style.opacity = 1;
-    messageDiv.style.color = isError ? "red" : "green"; // Change color based on error
+    messageDiv.style.display = "flex";
+    messageDiv.innerHTML = isError
+      ? `<span>${message}</span>` // No checkmark for error
+      : `<span class="checkmark"><i class="fa fa-check" style="font-size:48px;color:green"></i></span><span>${message}</span>`; // Checkmark for success
+
+    messageDiv.classList.remove("alert-success", "alert-danger");
+    messageDiv.classList.add(isError ? "alert-danger" : "alert-success");
+
     setTimeout(() => {
-      messageDiv.style.opacity = 0;
+      messageDiv.style.display = "none";
     }, 5000);
   } else {
     console.error(`Element with ID ${divId} not found.`);
@@ -126,6 +164,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const user = userCredential.user;
         showMessage("Login successful!", "signInMessage");
 
+        // ========================
+        // Clear the localStorage flag so the welcome message shows once after login
+        // localStorage.removeItem("hasShownWelcome");
+        localStorage.setItem("showWelcomeMessage", "true");
+
+        // =======================
         // Redirect to the home page or dashboard
         window.location.href = "home.html";
       })
@@ -326,11 +370,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initializeFeedback();
 });
 
-// Ensure DOM is fully loaded before initializing feedback
-document.addEventListener("DOMContentLoaded", () => {
-  initializeFeedback();
-});
-
+//Password
 document.addEventListener("DOMContentLoaded", () => {
   const profileForm = document.getElementById("profileForm");
 
@@ -398,3 +438,5 @@ export async function fetchPlacesFromFirebase() {
 
   return places;
 }
+
+export { db, storage };
