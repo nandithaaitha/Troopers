@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+.navbar-brand{
+    color: #000;
+}
+.fa-bars{
+    color: #fff;
+}
+.navbar{
+    background-color: orange;
+}
+.nav-link{
+    color: #000;
+}
+.nav-link.active {
+    color: red !important;
+}
+h2 {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    font-style: italic;
+    font-size: 36px;
+  }

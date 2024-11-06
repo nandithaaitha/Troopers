@@ -14,25 +14,67 @@
     />
     <script type="module" src="./js/firebaseauth.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <style>
+      body {
+        background-color: #f8f9fa;
+        font-family: Arial, sans-serif;
+      }
+      .main {
+        padding: 40px 0;
+      }
+      h1,
+      h2 {
+        color: #333;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .form-group {
+        margin-bottom: 25px;
+      }
+      #upload-form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      }
+      .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+      }
+      .btn-primary:hover {
+        background-color: #0056b3;
+      }
+      .alert {
+        max-width: 600px;
+        margin: 20px auto;
+      }
+    </style>
   </head>
   <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-warning">
-      <div class="container-fluid">
+      <div class="container">
         <a class="navbar-brand" href="#"><i class="fa-solid fa-bars"></i></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="home.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="support.html">Support</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="logout.html">Logout</a>
+              <a class="nav-link" href="adminLogout.html">Logout</a>
             </li>
           </ul>
         </div>
@@ -42,84 +84,11 @@
     <!-- Main Section -->
     <section class="main">
       <div class="container">
-        <h2>Upload Places</h2>
-        <div
-          id="alert-message"
-          class="alert alert-dismissible fade"
-          role="alert"
-          style="display: none"
-        >
-          <strong id="alert-text"></strong>
-        </div>
-        <form id="upload-form" enctype="multipart/form-data">
-          <div class="form-group">
-            <label for="excelFile">Upload Excel file</label>
-            <input
-              type="file"
-              class="form-control-file"
-              id="excelFile"
-              accept=".xls,.xlsx"
-              required
-            />
-          </div>
-          <button type="submit" class="btn btn-primary">Upload</button>
-        </form>
-      </div>
-    </section>
+        <h1>Hello Admin!</h1>
 
-    <script type="module">
-      import { uploadPlacesToFirebase } from "./js/firebaseauth.js";
-
-      document
-        .getElementById("upload-form")
-        .addEventListener("submit", function (event) {
-          event.preventDefault();
-          const fileInput = document.getElementById("excelFile");
-          const file = fileInput.files[0];
-
-          if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-              const data = new Uint8Array(e.target.result);
-              const workbook = XLSX.read(data, { type: "array" });
-              const firstSheetName = workbook.SheetNames[0];
-              const worksheet = workbook.Sheets[firstSheetName];
-              const jsonData = XLSX.utils.sheet_to_json(worksheet, {
-                header: 1,
-              });
-
-              const places = jsonData.slice(1).map((row) => ({
-                place_name: row[0],
-                image_path: row[1],
-              }));
-
-              // Upload places to Firestore
-              uploadPlacesToFirebase(places)
-                .then(() => {
-                  showAlert("Uploaded successfully!", "success");
-                })
-                .catch((error) => {
-                  console.error("Error uploading places:", error);
-                  showAlert(
-                    "Error uploading places. Please try again.",
-                    "danger"
-                  );
-                });
-            };
-            reader.readAsArrayBuffer(file);
-          }
-        });
-
-      function showAlert(message, type) {
-        const alertMessage = document.getElementById("alert-message");
-        const alertText = document.getElementById("alert-text");
-        alertText.textContent = message;
-        alertMessage.className = `alert alert-${type} alert-dismissible fade show`;
-        alertMessage.style.display = "block"; // Show the alert
-        setTimeout(() => {
-          alertMessage.style.display = "none"; // Hide after 3 seconds
-        }, 3000);
-      }
     </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </body>
 </html>

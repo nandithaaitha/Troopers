@@ -7,6 +7,25 @@
 body {
     font-family: Arial, sans-serif;
 }
+/* ========================== */
+/* Default Light Mode */
+body.light-mode .hero {
+    background-color: #fff;
+    color: #000;
+}
+
+body.dark-mode .hero {
+    background-color: #333;
+    color: #fff;
+}
+body.dark-mode .hero-text p{
+    color: #fff;
+}
+body.dark-mode .hero-text h1{
+    color: green;
+}
+
+/* ========================== */
 .navbar-brand{
     color: #000;
 }
