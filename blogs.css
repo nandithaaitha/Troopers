@@ -7,6 +7,24 @@
 body {
     font-family: Arial, sans-serif;
 }
+
+/* ========================== */
+body.light-mode {
+    background-color: #f4f7fc;
+    color: #333;
+}
+body.dark-mode {
+    background-color: #121212;
+    color: #f0f0f0;
+}
+body.dark-mode .hero .blogTitle{
+    color: #fff;
+}
+body.dark-mode .cardDate{
+    color: #000;
+}
+
+/* ========================== */
 .navbar-brand{
     color: #000;
 }
@@ -74,3 +92,42 @@ footer {
     margin-top: 20px;
 }
 
+@media (max-width: 768px) {
+    .blogCards {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .blogs .blogContent {
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    footer {
+        bottom: 20px;
+    }
+
+    .blogTitle {
+        font-size: 1.5rem;
+    }
+
+    .card {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .card img {
+        height: auto;
+        max-width: 100%;
+    }
+}
+
+.carousel-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    margin: 10px;
+}

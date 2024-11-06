@@ -10,6 +10,52 @@ body {
     background-color: #f4f7fc;
     color: #333;
 }
+/* ========================= */
+/* Light Mode (Default) */
+body.light-mode {
+    background-color: #f4f7fc;
+    color: #333;
+}
+
+.mainFeedback.light-mode,
+.boxFeedback.light-mode {
+    background-color: #fff;
+    color: #333;
+}
+
+/* Dark Mode */
+body.dark-mode {
+    background-color: #121212;
+    color: #f0f0f0;
+}
+
+.mainFeedback.dark-mode,
+.boxFeedback.dark-mode {
+    background-color: #333;
+    color: #f0f0f0;
+}
+/* Dark Mode Styling */
+.leftSide h2.dark-mode,
+.leftSide p.dark-mode {
+    color: #f0f0f0;
+}
+/* Dark Mode Carousel */
+.carousel-item img.dark-mode {
+    border-color: #f0f0f0;
+}
+body.dark-mode .boxFeedback{
+    background-color: #333;
+    /* color: #fff; */
+}
+body.dark-mode .boxFeedback .leftSide h2,
+body.dark-mode .boxFeedback .leftSide p{
+    color: #fff;
+}
+body.dark-mode .card-title{
+    color: #000;
+}
+
+/* ========================= */
 
 /* Feedback Section */
 .mainFeedback {

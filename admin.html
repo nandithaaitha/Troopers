@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Form</title>
+    <link rel="stylesheet" href="admin.css" />
+    <script type="module" src="./js/firebaseauth.js"></script>
+  </head>
+  <body>
+    <div class="admin-container">
+      <div class="admin-box">
+        <h2>Admin</h2>
+        <div class="admin-content">
+          <div class="admin-form">
+            <form id="adminForm">
+              <div
+                id="signInMessage"
+                class="MessageDiv"
+                style="display: none"
+              ></div>
+
+              <label for="username" class="form-label">Username</label>
+              <input
+                type="text"
+                id="admin-username"
+                name="username"
+                class="form-control"
+                required
+              />
+
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                id="admin-password"
+                name="password"
+                class="form-control"
+                required
+              />
+
+              <button type="submit" class="admin-button" id="submitSignIn">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const predefinedUsername = "admin";
+      const predefinedPassword = "admin123";
+
+      document
+        .getElementById("adminForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const username = document.getElementById("admin-username").value;
+          const password = document.getElementById("admin-password").value;
+
+          if (
+            username === predefinedUsername &&
+            password === predefinedPassword
+          ) {
+            window.location.href = "upload_places.html";
+          } else {
+            const messageDiv = document.getElementById("signInMessage");
+            messageDiv.style.display = "block";
+            messageDiv.classList.add("errorMessage");
+            messageDiv.innerText = "Invalid Username and Password";
+          }
+        });
+    </script>
+  </body>
+</html>

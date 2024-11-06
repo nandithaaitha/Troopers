@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wishlist</title>
+    <!-- Bootstrap CDN -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="./js/wishlist.js" defer></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+      $(function () {
+        $("#nav-placeholder").load("navbar.html");
+      });
+    </script>
+  </head>
+  <body>
+    <div id="nav-placeholder"></div>
+    <div class="container mt-5">
+        <h2>Your Wishlist</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Place Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="wishlist-body">
+                <!-- Wishlist items will be populated here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        const wishlistBody = document.getElementById("wishlist-body");
+
+        if (wishlist.length === 0) {
+            wishlistBody.innerHTML = "<tr><td colspan='2'>Your wishlist is empty.</td></tr>";
+        } else {
+            wishlist.forEach(placeName => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${placeName}</td>
+                    <td><button class="btn btn-danger remove-from-wishlist" data-name="${placeName}">Remove</button></td>
+                `;
+                wishlistBody.appendChild(row);
+            });
+        }
+
+        // Remove place from wishlist
+        document.addEventListener("click", function (event) {
+            if (event.target.classList.contains("remove-from-wishlist")) {
+                const placeName = event.target.getAttribute("data-name");
+                const index = wishlist.indexOf(placeName);
+                if (index > -1) {
+                    wishlist.splice(index, 1);
+                    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+                    location.reload(); // Refresh the page to update the list
+                }
+            }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

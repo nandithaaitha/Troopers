@@ -7,6 +7,50 @@
 body {
     font-family: Arial, sans-serif;
 }
+/* ============================== */
+body.light-mode {
+    background-color: #f4f7fc;
+    color: #333;
+}
+body.light-mode .card{
+    background-color: #000;
+}
+body.light-mode .card-title{
+    border-bottom: 1px solid #fff;
+    padding-bottom: 1rem;
+}
+body.light-mode .card-title,
+body.light-mode .card-title .card-text{
+    color: #fff;
+}
+
+body.light-mode .card-text,
+body.light-mode li,
+body.light-mode li i{
+    color: #fff;
+}
+body.light-mode h2{
+    color: green;
+
+}
+
+
+body.dark-mode {
+    background-color: #121212;
+    color: #f0f0f0;
+}
+body.dark-mode .card-title,
+body.dark-mode .card-title .card-text{
+    color: #000;
+}
+body.dark-mode h2,
+body.dark-mode .card-text,
+body.dark-mode li,
+body.dark-mode li i{
+    color: #000;
+}
+
+/* ============================= */
 .navbar-brand{
     color: #000;
 }

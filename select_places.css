@@ -7,6 +7,24 @@
 body {
     font-family: Arial, sans-serif;
 }
+/* ==================== */
+body.light-mode  {
+    background-color: #fff;
+    color: #000;
+}
+
+body.dark-mode  {
+    background-color: #333;
+    color: #fff;
+}
+body.dark-mode .card-title,
+body.dark-mode .card-text{
+    color: #000;
+}
+
+
+/* ==================== */
+
 .navbar-brand{
     color: #000;
 }
@@ -138,5 +156,34 @@ footer {
 .carousel-control-next-icon:after {
 
     color: #fff;
+}
+
+.modal-header #searchInput {
+    margin-left: 10px;
+    width: 50%;
+}
+
+.list-group-item {
+    margin-bottom: 15px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.modal-dialog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    border-radius: 10px;
+}
+
+.modal-body {
+    max-height: 500px;
+    overflow-y: auto;
 }
 
