@@ -14,15 +14,30 @@ body.light-mode {
 }
 
 .navbar-light-mode {
-    background-color: orange;
+    background-color: #FFA500; /* Orange for light mode */
+}
+.navbar-dark-mode {
+    background-color: #444; /* Dark gray for dark mode */
 }
 
+
 .nav-link-light {
-    color: #333; /* Darker shade for better contrast */
+    color: #222; /* Darker color for better contrast */
 }
+
+.nav-link-dark {
+    color: #e0e0e0; /* Lighter shade for better contrast */
+}
+
+
 .nav-link:hover {
-    color: #ff6600; /* Bright color for better visibility */
+    color: #ff6600; /* Bright color for visibility */
 }
+.nav-link.active {
+    color: #ff0000; /* High-contrast color for active links */
+}
+
+
 
 
 /* Dark Mode */
@@ -35,9 +50,6 @@ body.dark-mode {
     background-color: #333;
 }
 
-.nav-link-dark {
-    color: #ddd; /* Lighter shade for better contrast */
-}
 
 /* ======================= */
 .navbar-brand{
@@ -51,9 +63,6 @@ body.dark-mode {
 }
 .nav-link{
     color: #000;
-}
-.nav-link.active {
-    color: #ff0000; /* Ensures high visibility for active links */
 }
 .sticky-top{
     position: sticky;
@@ -71,10 +80,11 @@ body.dark-mode {
   right: -3px;
   background-color: red;
   color: white;
-  font-size: 10px;
+  font-size: 12px;
   padding: 3px 6px;
   border-radius: 50%;
 }
+
 /* Dropdown Styling */
 #notification-list {
   position: absolute;
@@ -90,8 +100,13 @@ body.dark-mode {
   z-index: 1000;
 }
 
+
 #theme-toggle {
-    min-width: 100px; /* Adjust as needed */
-    white-space: nowrap;
+    color: #333;
+    border-color: #333;
+}
+.dark-mode #theme-toggle {
+    color: #fff;
+    border-color: #ddd;
 }
 
