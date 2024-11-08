@@ -18,8 +18,12 @@ body.light-mode {
 }
 
 .nav-link-light {
-    color: black;
+    color: #333; /* Darker shade for better contrast */
 }
+.nav-link:hover {
+    color: #ff6600; /* Bright color for better visibility */
+}
+
 
 /* Dark Mode */
 body.dark-mode {
@@ -32,8 +36,9 @@ body.dark-mode {
 }
 
 .nav-link-dark {
-    color: white;
+    color: #ddd; /* Lighter shade for better contrast */
 }
+
 /* ======================= */
 .navbar-brand{
     color: #000;
@@ -48,7 +53,7 @@ body.dark-mode {
     color: #000;
 }
 .nav-link.active {
-    color: red !important;
+    color: #ff0000; /* Ensures high visibility for active links */
 }
 .sticky-top{
     position: sticky;
