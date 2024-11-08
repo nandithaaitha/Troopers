@@ -1,66 +1,159 @@
+/* General Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
+  }
+  
+  body {
     font-family: Arial, sans-serif;
-}
-.navbar-brand{
-    color: #000;
-}
-.fa-bars{
-    color: #fff;
-}
-.navbar{
+  }
+  
+  /* Navbar */
+  .navbar {
     background-color: orange;
-}
-.nav-link{
+  }
+  
+  .nav-link {
     color: #000;
-}
-.nav-link.active {
+  }
+  
+  .nav-link.active {
     color: red !important;
-}
-
-.city{
+  }
+  
+  /* City Section */
+  .city {
     padding: 10px 30px;
-}
-.city h2{
+  }
+  
+  .city h2 {
     text-align: center;
     margin-top: 2rem;
-}
-.cards{
+  }
+  
+  /* Cards Layout */
+  .cards {
     display: flex;
+    flex-wrap: nowrap;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
     margin-top: 4rem;
-    border: none;
-    outline: none;
-}
-.card-title{
+    gap: 10px;
+  }
+  
+  .card {
+    flex: 1;
+    max-width: 22%;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
     text-align: center;
-}
-.btn{
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .card-title {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .card-body {
+    padding: 1rem;
+  }
+  
+  .weather-info {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+  
+  /* Buttons */
+  .btn {
     display: block;
     margin: auto;
-    width: 30%;
+    width: 70%;
     background-color: #fff;
     color: #000;
     border: 1px solid #000;
-}
-footer {
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 5px 0;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+  }
+  
+  .btn:hover {
+    background-color: orange;
+    color: #fff;
+    border-color: orange;
+  }
+  
+  /* Hourly Forecast Section */
+  .forecast-container {
+    display: flex;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding: 10px 0;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .forecast-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    padding: 10px;
+    min-width: 100px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  
+  .forecast-card p {
+    font-size: 0.85rem;
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  /* Footer */
+  footer {
     position: fixed;
     bottom: 5px;
     right: 20px;
-}
-
-.contact-icon {
+  }
+  
+  .contact-icon {
     background-color: #ff4c4c;
     padding: 15px;
     border-radius: 50%;
     color: white;
     font-size: 1.5rem;
     margin-top: 20px;
-}
-
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .cards {
+      flex-wrap: wrap;
+    }
+  
+    .card {
+      max-width: 45%;
+    }
+  
+    .btn {
+      width: 90%;
+    }
+  }
+  
