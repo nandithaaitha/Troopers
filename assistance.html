@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Request Assistance</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <style>
+      /* Basic CSS as per the design schema */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+      }
+      body.light-mode {
+        background-color: #f4f7fc;
+        color: #333;
+      }
+      .navbar {
+        background-color: orange;
+      }
+      .nav-link {
+        color: #000;
+      }
+      .nav-link.active {
+        color: red !important;
+      }
+      .main h2 {
+        text-align: center;
+        margin-top: 2rem;
+      }
+      .btn-outline-primary {
+        display: block;
+        margin: auto;
+        width: 40%;
+      }
+      form {
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 8px;
+        max-width: 600px;
+        margin: 2rem auto;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <script>
+      $(function () {
+        $("#nav-placeholder").load("navbar.html");
+      });
+    </script>
+  </head>
+  <body>
+    <div id="nav-placeholder"></div>
+    <section class="main">
+      <div class="container">
+        <h2>Request Assistance</h2>
+        <div class="text-center mt-4">
+          <button class="btn btn-outline-primary" id="create-request-btn">
+            Create Assistance Request
+          </button>
+        </div>
+
+        <!-- Assistance Request Form (hidden by default) -->
+        <div id="assistance-form" class="mt-4" style="display: none;">
+          <form id="assistanceRequestForm">
+            <!-- Disability Type Selection -->
+            <div class="form-group">
+              <label for="assistanceType">Type of Disability Assistance Needed</label>
+              <select class="form-control" id="assistanceType" required>
+                <option value="">Select Type</option>
+                <option value="eye">Eye Disability</option>
+                <option value="auditory">Auditory Disability</option>
+                <option value="speech">Speech Disability</option>
+                <option value="physical">Physical Disability</option>
+              </select>
+            </div>
+
+            <!-- General Request Details -->
+            <div class="form-group">
+              <label for="description">Please Describe Your Needs</label>
+              <textarea
+                class="form-control"
+                id="description"
+                rows="4"
+                placeholder="Provide specific details on the assistance you need, e.g., transportation assistance, communication aid, etc."
+                required
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="preferredDate">Preferred Date and Time</label>
+              <input
+                type="datetime-local"
+                class="form-control"
+                id="preferredDate"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="contactInfo">Your Contact Information</label>
+              <input
+                type="text"
+                class="form-control"
+                id="contactInfo"
+                placeholder="Provide your contact details (email or phone number)"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="additionalNotes">Additional Notes</label>
+              <textarea
+                class="form-control"
+                id="additionalNotes"
+                rows="3"
+                placeholder="Any additional information or special requests"
+              ></textarea>
+            </div>
+
+            <!-- Dynamic Questions based on Disability Type -->
+            <div id="dynamic-questions">
+              <!-- Dynamic questions will appear here based on the selection -->
+            </div>
+
+            <button type="submit" class="btn btn-outline-primary">
+              Submit Request
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="contact-icon">
+        <i class="fas fa-phone"></i>
+      </div>
+    </footer>
+
+    <!-- Inline JavaScript for dynamic question display and form submission -->
+    <script>
+      document.getElementById("create-request-btn").addEventListener("click", function () {
+        document.getElementById("assistance-form").style.display = "block";
+      });
+
+      document.getElementById("assistanceType").addEventListener("change", function () {
+        const type = this.value;
+        const questionsDiv = document.getElementById("dynamic-questions");
+        questionsDiv.innerHTML = ""; // Clear previous questions
+
+        let questionsHTML = "";
+        switch (type) {
+          case "eye":
+            questionsHTML = `
+              <div class="form-group">
+                <label>Describe Your Vision Impairment</label>
+                <textarea class="form-control" rows="3" placeholder="E.g., low vision, color blindness, etc." required></textarea>
+              </div>
+              <div class="form-group">
+                <label>What Type of Visual Assistance Do You Need?</label>
+                <textarea class="form-control" rows="3" placeholder="E.g., screen readers, larger text, etc." required></textarea>
+              </div>
+            `;
+            break;
+
+          case "auditory":
+            questionsHTML = `
+              <div class="form-group">
+                <label>Describe Your Hearing Impairment</label>
+                <textarea class="form-control" rows="3" placeholder="E.g., partial hearing loss, complete hearing loss." required></textarea>
+              </div>
+              <div class="form-group">
+                <label>What Type of Auditory Assistance Do You Require?</label>
+                <textarea class="form-control" rows="3" placeholder="E.g., sign language interpreter, assistive listening devices, etc." required></textarea>
+              </div>
+            `;
+            break;
+
+          case "speech":
+            questionsHTML = `
+              <div class="form-group">
+                <label>Describe Your Speech Impairment</label>
+                <textarea class="form-control" rows="3" placeholder="E.g., difficulty in speaking, stammering." required></textarea>
+              </div>
+              <div class="form-group">
+                <label>What Kind of Communication Assistance Do You Need?</label>
+                <textarea class="form-control" rows="3" placeholder="E.g., text-to-speech device, speech therapist support, etc." required></textarea>
+              </div>
+            `;
+            break;
+
+          case "physical":
+            questionsHTML = `
+              <div class="form-group">
+                <label>Describe Your Physical Disability</label>
+                <textarea class="form-control" rows="3" placeholder="E.g., wheelchair assistance, limited mobility." required></textarea>
+              </div>
+              <div class="form-group">
+                <label>What Type of Mobility Assistance Do You Need?</label>
+                <textarea class="form-control" rows="3" placeholder="E.g., accessible transportation, wheelchair support, etc." required></textarea>
+              </div>
+            `;
+            break;
+
+          default:
+            questionsHTML = "";
+        }
+
+        questionsDiv.innerHTML = questionsHTML;
+      });
+
+            document.getElementById("assistanceRequestForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const request = {
+            id: Date.now(), // Unique ID for each request
+            assistanceType: document.getElementById("assistanceType").value,
+            description: document.getElementById("description").value,
+            preferredDate: document.getElementById("preferredDate").value,
+            contactInfo: document.getElementById("contactInfo").value,
+            additionalNotes: document.getElementById("additionalNotes").value,
+            dynamicQuestions: Array.from(document.querySelectorAll("#dynamic-questions textarea")).map(
+            (textarea) => textarea.value
+            ),
+            status: "Created" // Initial status when the request is created
+        };
+
+        // Save request to localStorage
+        let requests = JSON.parse(localStorage.getItem("assistanceRequests")) || [];
+        requests.push(request);
+        localStorage.setItem("assistanceRequests", JSON.stringify(requests));
+
+        alert("Your assistance request has been created successfully!");
+
+        // Reset form and hide it
+        document.getElementById("assistanceRequestForm").reset();
+        document.getElementById("assistance-form").style.display = "none";
+        });
+
+    </script>
+  </body>
+</html>

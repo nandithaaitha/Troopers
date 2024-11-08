@@ -77,6 +77,14 @@
                           <button class="btn11">Show Places</button>
                       </div>
                   </div>
+                  <div class="card" style="width: 234px; height: 321px;">
+                    <img src="./img/transport.jpeg" class="card-img-top" alt="Restaurant" />
+                    <div class="card-body">
+                        <h5 class="card-title">Public Transportation</h5>
+                        <p class="card-text">Discover accessible public Transportation</p>
+                        <button class="btn11">Show Places</button>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -144,56 +152,79 @@
                   return "./data/restaurants.csv";
                 case "Shopping Malls":
                   return "./data/shopping.csv";
+                case "Public Transportation":
+                  return "./data/public_transportations.csv";
                 default:
                     return "";
             }
         }
 
         function displayInModal(data, type) {
-            const modalTitle = document.getElementById("placeItemsModalLabel");
-            const modalBody = document.getElementById("related-items-list");
+    const modalTitle = document.getElementById("placeItemsModalLabel");
+    const modalBody = document.getElementById("related-items-list");
 
-            modalTitle.textContent = `${type} - Available Places`;
-            modalBody.innerHTML = "";
+    modalTitle.textContent = `${type} - Available Places`;
+    modalBody.innerHTML = "";
 
-            data.forEach(item => {
-                const listItem = document.createElement("li");
-                listItem.classList.add("list-group-item", "mb-3", "p-3", "text-center");
+    data.forEach(item => {
+        const name = item["Name of Place "] || "No name provided";
+        const location = item["Location"] || "Not available";
+        const accessibility = item["Accessbilty Feature"] || "Not available";
+        const rating = item["User Rate"] || "Not available";
+        const contact = item["Contatc Information"] ? `<a href="${item["Contatc Information"]}" target="_blank">Visit Website</a>` : "Not available";
 
-                listItem.innerHTML = `
-                  <h5>${item["Name of Place "] || "No name provided"}</h5>
-                  <p><strong>Location:</strong> ${item["Location"] || "Not available"}</p>
-                  <p><strong>Accessibility:</strong> ${item["Accessbilty Feature"] || "Not available"}</p>
-                  <p><strong>User Rating:</strong> ${item["User Rate"] || "Not available"}</p>
-                  <p><strong>Contact:</strong> <a href="${item["Contatc Information"]}" target="_blank">${item["Contatc Information"] || "Not available"}</a></p>
-                  <button class="btn btn-outline-danger add-to-wishlist" data-name="${item["Name of Place "]}">
-                      <i class="fas fa-heart"></i> Add to Wishlist
-                  </button>
-              `;
-                modalBody.appendChild(listItem);
-            });
+        const listItem = document.createElement("li");
+        listItem.classList.add("list-group-item", "mb-3", "p-3", "text-center");
 
-            $("#placeItemsModal").modal("show");
-        }
+        listItem.innerHTML = `
+            <h5>${name}</h5>
+            <p><strong>Location:</strong> ${location}</p>
+            <p><strong>Accessibility:</strong> ${accessibility}</p>
+            <p><strong>User Rating:</strong> ${rating}</p>
+            <p><strong>Contact:</strong> ${contact}</p>
+            <button class="btn btn-outline-danger add-to-wishlist" 
+                data-name="${name}" 
+                data-location="${location}" 
+                data-accessibility="${accessibility}" 
+                data-rating="${rating}" 
+                data-contact="${item["Contatc Information"]}">
+                <i class="fas fa-heart"></i> Add to Wishlist
+            </button>
+        `;
+        modalBody.appendChild(listItem);
+    });
 
-                // Wishlist functionality
-        document.addEventListener("click", function (event) {
-            if (event.target.classList.contains("add-to-wishlist")) {
-                const placeName = event.target.getAttribute("data-name");
-                addToWishlist(placeName);
-            }
-        });
+    $("#placeItemsModal").modal("show");
+}
 
-        function addToWishlist(placeName) {
-            let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-            if (!wishlist.includes(placeName)) {
-                wishlist.push(placeName);
-                localStorage.setItem("wishlist", JSON.stringify(wishlist));
-                alert(`${placeName} added to wishlist!`);
-            } else {
-                alert(`${placeName} is already in your wishlist!`);
-            }
-        }
+// Function to add a place to the wishlist
+function addToWishlist(place) {
+    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    // Check if the place is already in the wishlist by comparing names
+    const placeExists = wishlist.some(item => item.name === place.name);
+    if (placeExists) {
+        alert(`${place.name} is already in your wishlist!`);
+    } else {
+        wishlist.push(place); // Add full place object to the wishlist
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+        alert(`${place.name} has been added to your wishlist!`);
+    }
+}
+
+// Event listener for each "Add to Wishlist" button on place cards
+document.addEventListener("click", function(event) {
+    if (event.target.classList.contains("add-to-wishlist")) {
+        const place = {
+            name: event.target.getAttribute("data-name"),
+            location: event.target.getAttribute("data-location"),
+            accessibility: event.target.getAttribute("data-accessibility"),
+            rating: event.target.getAttribute("data-rating"),
+            contact: event.target.getAttribute("data-contact")
+        };
+        addToWishlist(place);
+    }
+});
         
         document.getElementById("searchInput").addEventListener("input", function() {
             const searchTerm = this.value.toLowerCase();
