@@ -23,6 +23,7 @@ import {
   query,
   where,
   addDoc,
+  deleteDoc, getDoc,
   orderBy,
   serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
@@ -298,6 +299,34 @@ async function fetchFeedback() {
     return [];
   }
 }
+
+// Function to fetch feedback for admin
+export async function fetchFeedbackForAdmin() {
+  try {
+    const feedbackCollection = collection(db, "feedback");
+    const q = query(feedbackCollection, orderBy("createdAt", "desc"));
+    const querySnapshot = await getDocs(q);
+    const feedbacks = [];
+    querySnapshot.forEach((doc) => {
+      feedbacks.push({ id: doc.id, ...doc.data() });
+    });
+    return feedbacks;
+  } catch (error) {
+    console.error("Error fetching feedback: ", error);
+    return [];
+  }
+}
+
+// Function to delete feedback from Firestore by admin
+export async function deleteFeedback(feedbackId) {
+  try {
+    await deleteDoc(doc(db, "feedback", feedbackId));
+    console.log(`Feedback with ID ${feedbackId} deleted successfully.`);
+  } catch (error) {
+    console.error("Error deleting feedback: ", error);
+  }
+}
+
 
 // Function to render feedback in the carousel
 
