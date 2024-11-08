@@ -26,8 +26,8 @@
         <button
           class="navbar-toggler"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
+          data-toggle="collapse"
+          data-target="#navbarNav"
           aria-controls="navbarNav"
           aria-expanded="false"
           aria-label="Toggle navigation"
@@ -36,50 +36,39 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="travel_trips.html">About</a></li>
             <li class="nav-item">
-              <a class="nav-link" href="home.html">Home</a>
+              <a class="nav-link" href="select_disability.html">Disability Preference</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="travel_trips.html">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="select_disability.html"
-                >Disability Preference</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="feedback.html">Feedback</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="support.html">Support</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="disability.html">Health</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="blogs.html">Blogs</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="faq.html">FAQ</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="wishlist.html">Wishlist</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="admin.html">Admin</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="profile.html">Profile</a>
-            </li>
+            <li class="nav-item"><a class="nav-link" href="feedback.html">Feedback</a></li>
+            <li class="nav-item"><a class="nav-link" href="support.html">Support</a></li>
+            <li class="nav-item"><a class="nav-link" href="assistance.html">Request Assistance</a></li>
+            <li class="nav-item"><a class="nav-link" href="disability.html">Health</a></li>
+            <li class="nav-item"><a class="nav-link" href="blogs.html">Blogs</a></li>
+            <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
+            <li class="nav-item"><a class="nav-link" href="wishlist.html">Wishlist</a></li>
+            <li class="nav-item"><a class="nav-link" href="admin.html">Admin</a></li>
+            <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
             <li class="nav-item">
               <a class="nav-link" href="#" id="logoutBtn">Logout</a>
             </li>
 
-            <!-- Add Light/Dark Mode Toggle Button -->
+              <!-- Notification Bell Icon -->
+              <li class="nav-item">
+                <a class="nav-link" href="#" id="notificationBell" onclick="toggleNotifications(event)">
+                  <i class="fas fa-bell"></i>
+                  <span id="notification-count">0</span>
+                </a>
+                <!-- Notification Dropdown -->
+                <div id="notification-list" class="dropdown-menu dropdown-menu-right">
+                  <span class="dropdown-item text-center">No new notifications</span>
+                </div>
+              </li>
+
+            <!-- Light/Dark Mode Toggle Button -->
             <li class="nav-item">
-              <button id="theme-toggle" class="btn btn-outline-dark">
-                Dark Mode
-              </button>
+              <button id="theme-toggle" class="btn btn-outline-dark">Dark Mode</button>
             </li>
           </ul>
         </div>
@@ -127,82 +116,86 @@
     </div>
 
     <script>
-      // Add 'active' class to the current link
-      const currentLocations = location.href;
-      const navLink = document.querySelectorAll(".nav-link");
-      navLink.forEach((link) => {
-        if (link.href === currentLocations) {
-          link.classList.add("active");
-        }
-      });
-    </script>
 
-    <script>
-      const themeToggle = document.getElementById("theme-toggle");
-      const body = document.body;
+      // Toggle notification dropdown
+      function toggleNotifications(event) {
+        event.preventDefault();
+        const notificationList = document.getElementById("notification-list");
+        notificationList.style.display = notificationList.style.display === "block" ? "none" : "block";
+        loadNotifications(); // Load notifications when the dropdown is opened
+      }
 
-      // Check saved theme in localStorage
-      const savedTheme = localStorage.getItem("theme") || "light";
-      setTheme(savedTheme);
+      // Load and display notifications in the navbar
+      function loadNotifications() {
+        const notifications = JSON.parse(localStorage.getItem("notifications")) || [];
+        const notificationCount = document.getElementById("notification-count");
+        const notificationList = document.getElementById("notification-list");
 
-      themeToggle.addEventListener("click", () => {
-        const currentTheme = body.classList.contains("dark-mode")
-          ? "light"
-          : "dark";
-        setTheme(currentTheme);
-      });
+        // Count unread notifications
+        const unreadCount = notifications.filter(n => !n.read).length;
+        notificationCount.textContent = unreadCount > 0 ? unreadCount : '';
+        notificationCount.style.display = unreadCount > 0 ? "inline" : "none";
 
-      function setTheme(theme) {
-        if (theme === "dark") {
-          body.classList.add("dark-mode");
-          body.classList.remove("light-mode");
-          themeToggle.textContent = "Light Mode";
-          themeToggle.classList.replace(
-            "btn-outline-dark",
-            "btn-outline-light"
-          );
-          localStorage.setItem("theme", "dark");
+        // Populate the notification dropdown
+        notificationList.innerHTML = "";
+        if (notifications.length > 0) {
+          notifications.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+          notifications.forEach((notification) => {
+            notificationList.innerHTML += `
+              <div class="dropdown-item ${!notification.read ? 'bg-light' : ''}">
+                <div>${notification.message}</div>
+                <small class="text-muted">${notification.timestamp}</small>
+              </div>`;
+          });
         } else {
-          body.classList.add("light-mode");
-          body.classList.remove("dark-mode");
-          themeToggle.textContent = "Dark Mode";
-          themeToggle.classList.replace(
-            "btn-outline-light",
-            "btn-outline-dark"
-          );
-          localStorage.setItem("theme", "light");
+          notificationList.innerHTML = '<span class="dropdown-item text-center">No new notifications</span>';
         }
       }
-    </script>
 
-    <script>
-      // Add 'active' class to the current link
-      const currentLocation = location.href;
-      const navLinks = document.querySelectorAll(".nav-link");
-      navLinks.forEach((link) => {
-        if (link.href === currentLocation) {
-          link.classList.add("active");
+      // Initialize notification count on page load
+      document.addEventListener("DOMContentLoaded", loadNotifications);
+
+      // Listen to changes in localStorage for real-time notification updates
+      window.addEventListener("storage", (event) => {
+        if (event.key === "notifications") {
+          loadNotifications();
         }
       });
 
-      // Logout functionality
-      document
-        .getElementById("logoutBtn")
-        .addEventListener("click", function (event) {
-          event.preventDefault();
-          $("#logoutModal").modal("show");
-        });
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(event) {
+        const notificationList = document.getElementById("notification-list");
+        const notificationBell = document.getElementById("notificationBell");
 
-      document
-        .getElementById("confirmLogoutBtn")
-        .addEventListener("click", function () {
-          window.location.href = "login.html"; // Redirect to login page
-        });
+        if (!notificationBell.contains(event.target) && 
+            !notificationList.contains(event.target)) {
+          notificationList.style.display = "none";
+        }
+      });
+
+      // Theme toggle
+      const themeToggle = document.getElementById("theme-toggle");
+      themeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        themeToggle.textContent = document.body.classList.contains("dark-mode")
+          ? "Light Mode"
+          : "Dark Mode";
+      });
+
+      // Show logout modal
+      document.getElementById("logoutBtn").addEventListener("click", function (event) {
+        event.preventDefault();
+        $("#logoutModal").modal("show");
+      });
+
+      // Logout redirect
+      document.getElementById("confirmLogoutBtn").addEventListener("click", function () {
+        window.location.href = "login.html";
+      });
     </script>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </body>
 </html>
