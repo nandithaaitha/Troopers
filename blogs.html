@@ -27,7 +27,7 @@
                     Discover 15 famous places in Dallas that offer accessibility features for various disabilities. Plan your journey with ease and enjoy an inclusive experience.
                 </p>
 
-                <div id="blogCarousel" class="carousel slide" data-ride="carousel" data-interval="2000">
+                <div id="blogCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
                     <div class="carousel-inner">
                         <!-- Group 1 of 3 cards -->
                         <div class="carousel-item active">
@@ -384,7 +384,20 @@
             </div>
         </section>
     </main>
-
+    <script>
+        $(document).ready(function () {
+            // Pause carousel on button click
+            $(".btn").on("click", function (e) {
+                $('#blogCarousel').carousel('pause');
+            });
+    
+            // Restart carousel when the mouse leaves
+            $("#blogCarousel").on("mouseleave", function () {
+                $('#blogCarousel').carousel('cycle');
+            });
+        });
+    </script>
+    
     <footer>
         <div class="contact-icon">
             <i class="fas fa-phone"></i>
