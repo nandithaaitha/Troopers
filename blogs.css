@@ -7,6 +7,11 @@
 body {
     font-family: Arial, sans-serif;
 }
+.btn {
+    z-index: 10;
+    position: relative;
+}
+
 
 /* ========================== */
 body.light-mode {
@@ -130,4 +135,12 @@ footer {
 
 .card {
     margin: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 40px !important;
+    z-index: 5; /* Ensure they don't interfere with card content */
 }
