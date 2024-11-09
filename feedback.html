@@ -47,8 +47,11 @@
 
     <!-- Load Navbar -->
     <script>
-      $(function () {
-        $("#nav-placeholder").load("navbar.html");
+      $(document).ready(function () {
+        $("#nav-placeholder").load("navbar.html", function () {
+          // Reapply theme after loading navbar
+          applyTheme();
+        });
       });
     </script>
   </head>
@@ -75,7 +78,7 @@
         <!-- Bootstrap Carousel for dynamic feedback -->
 <!-- Bootstrap Carousel for dynamic feedback -->
 
-  <div id="feedbackCarousel" class="carousel slide" data-ride="carousel">
+  <div id="feedbackCarousel" class="carousel slide" data-ride="carousel" data-interval="2000">
     <div class="carousel-inner" id="carouselItems" style="margin-left: -45%;">
       <!-- Carousel items will be dynamically inserted here -->
     </div>
@@ -176,12 +179,6 @@
       </div>
     </div>
     
-    <div id="feedbackMessage" class="mt-3"></div>
-    <footer class="text-center py-4">
-      <div class="contact-icon">
-        <i class="fas fa-phone"></i>
-      </div>
-    </footer>
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>

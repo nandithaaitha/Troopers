@@ -1,9 +1,10 @@
 /* General Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
   
   body {
     font-family: Arial, sans-serif;
@@ -157,3 +158,9 @@
     }
   }
   
+
+#theme-toggle {
+    color: #333;
+    border-color: #333;
+    width: 60px;
+}

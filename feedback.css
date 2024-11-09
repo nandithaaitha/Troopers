@@ -140,7 +140,6 @@ body.dark-mode .card-title{
 
 .cardStar span {
     font-size: 1.5rem;
-    color: gold;
 }
 
 .cardTitle h5 {
@@ -148,6 +147,8 @@ body.dark-mode .card-title{
     font-size: 1.2rem;
     color: #333;
 }
+
+  
 
 .card-text {
     font-size: 1rem;

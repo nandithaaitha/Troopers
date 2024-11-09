@@ -20,8 +20,11 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <script>
-      $(function () {
-        $("#nav-placeholder").load("navbar.html");
+      $(document).ready(function () {
+        $("#nav-placeholder").load("navbar.html", function () {
+          // Reapply theme after loading navbar
+          applyTheme();
+        });
       });
     </script>
   </head>

@@ -40,9 +40,17 @@
         background-color: #0056b3;
       }
       table {
-        width: 100%;
-        margin: 20px 0;
-      }
+    width: 100%;
+    margin: 20px 0;
+  }
+  .table td, .table th {
+    vertical-align: middle;
+  }
+  .table .status-dropdown {
+    min-width: 120px; /* Minimum width to show full text */
+    max-width: 100%; /* Allow it to take up available space */
+    padding: 5px;
+  }
     </style>
   </head>
   <body>
@@ -84,7 +92,10 @@
               <th>Type of Assistance</th>
               <th>Description</th>
               <th>Preferred Date</th>
+              <th>Preferred Location</th>
+              <th>Additional Notes</th>
               <th>Contact</th>
+              <th>Specific Needs</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -178,13 +189,39 @@
         requestList.innerHTML = "";
 
         requests.forEach((request, index) => {
+          // Set question title based on the type of assistance
+          let specificNeedTitle;
+          switch (request.assistanceType) {
+            case "eye":
+              specificNeedTitle = "Type of Visual Assistance Needed";
+              break;
+            case "auditory":
+              specificNeedTitle = "Type of Auditory Assistance Needed";
+              break;
+            case "speech":
+              specificNeedTitle = "Type of Communication Assistance Needed";
+              break;
+            case "physical":
+              specificNeedTitle = "Type of Mobility Assistance Needed";
+              break;
+            default:
+              specificNeedTitle = "Other Specific Needs";
+          }
+
+          const specificNeeds = `
+            <p><strong>${specificNeedTitle}:</strong> ${request.dynamicQuestions.join(", ")}</p>
+          `;
+
           const row = document.createElement("tr");
 
           row.innerHTML = `
             <td>${request.assistanceType}</td>
             <td>${request.description}</td>
             <td>${request.preferredDate}</td>
+            <td>${request.locationInfo}</td>
+            <td>${request.additionalNotes || "N/A"}</td>
             <td>${request.contactInfo}</td>
+            <td>${specificNeeds}</td>
             <td>
               <select class="form-control status-dropdown" data-index="${index}">
                 <option value="Created" ${request.status === "Created" ? "selected" : ""}>Created</option>

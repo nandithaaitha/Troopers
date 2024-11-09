@@ -56,8 +56,11 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <script>
-      $(function () {
-        $("#nav-placeholder").load("navbar.html");
+      $(document).ready(function () {
+        $("#nav-placeholder").load("navbar.html", function () {
+          // Reapply theme after loading navbar
+          applyTheme();
+        });
       });
     </script>
   </head>
@@ -105,6 +108,16 @@
                 type="datetime-local"
                 class="form-control"
                 id="preferredDate"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="locationInfo">Preferred Location</label>
+              <input
+                type="text"
+                class="form-control"
+                id="contactInfo"
                 required
               />
             </div>
@@ -165,10 +178,6 @@
           case "eye":
             questionsHTML = `
               <div class="form-group">
-                <label>Describe Your Vision Impairment</label>
-                <textarea class="form-control" rows="3" placeholder="E.g., low vision, color blindness, etc." required></textarea>
-              </div>
-              <div class="form-group">
                 <label>What Type of Visual Assistance Do You Need?</label>
                 <textarea class="form-control" rows="3" placeholder="E.g., screen readers, larger text, etc." required></textarea>
               </div>
@@ -177,10 +186,6 @@
 
           case "auditory":
             questionsHTML = `
-              <div class="form-group">
-                <label>Describe Your Hearing Impairment</label>
-                <textarea class="form-control" rows="3" placeholder="E.g., partial hearing loss, complete hearing loss." required></textarea>
-              </div>
               <div class="form-group">
                 <label>What Type of Auditory Assistance Do You Require?</label>
                 <textarea class="form-control" rows="3" placeholder="E.g., sign language interpreter, assistive listening devices, etc." required></textarea>
@@ -191,10 +196,6 @@
           case "speech":
             questionsHTML = `
               <div class="form-group">
-                <label>Describe Your Speech Impairment</label>
-                <textarea class="form-control" rows="3" placeholder="E.g., difficulty in speaking, stammering." required></textarea>
-              </div>
-              <div class="form-group">
                 <label>What Kind of Communication Assistance Do You Need?</label>
                 <textarea class="form-control" rows="3" placeholder="E.g., text-to-speech device, speech therapist support, etc." required></textarea>
               </div>
@@ -203,10 +204,6 @@
 
           case "physical":
             questionsHTML = `
-              <div class="form-group">
-                <label>Describe Your Physical Disability</label>
-                <textarea class="form-control" rows="3" placeholder="E.g., wheelchair assistance, limited mobility." required></textarea>
-              </div>
               <div class="form-group">
                 <label>What Type of Mobility Assistance Do You Need?</label>
                 <textarea class="form-control" rows="3" placeholder="E.g., accessible transportation, wheelchair support, etc." required></textarea>

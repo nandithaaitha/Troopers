@@ -20,8 +20,11 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <script>
-      $(function () {
-        $("#nav-placeholder").load("navbar.html");
+      $(document).ready(function () {
+        $("#nav-placeholder").load("navbar.html", function () {
+          // Reapply theme after loading navbar
+          applyTheme();
+        });
       });
     </script>
   </head>
@@ -37,13 +40,7 @@
           </div>
           <h1>About</h1>
           <p>
-            A person with a disability has a physical or mental impairment that
-            limits their ability to perform major life activities. Disabilities
-            can include sensory impairments, intellectual and developmental
-            disabilities, and more. People with disabilities are twice as likely
-            to develop conditions like depression, asthma, diabetes, stroke,
-            obesity, or poor oral health. They may also die up to 20 years
-            earlier than people without disabilities.
+            Traveling can be a challenging and stressful experience for individuals with disabilities, who often face numerous barriers that limit their access to enjoyable travel experiences. These barriers include inaccessible facilities, lack of reliable information about accessible places, inadequate transportation options, and limited knowledge of services that cater to their specific needs. This lack of information and accessibility awareness often leads to difficulty in planning trips, reducing the confidence and independence of travellers with disabilities. Our team is dedicated to enhancing the travel experience of individuals with disabilities via our innovative web service “Accessible Travel Planner”. The idea is to assist those individuals to gain a better traveling experience by providing them with accessible locations, restaurants, tourist places, museums, etc. The targeted people are individuals with a physical or mental disability who require accessible facilities and support to ensure they have an enjoyable travel experience
           </p>
         </div>
       </section>
