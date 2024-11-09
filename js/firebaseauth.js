@@ -52,65 +52,21 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
-// Function to display messages
-// function showMessage(message, divId, isError = false) {
-//   const messageDiv = document.getElementById(divId);
-//   if (messageDiv) {
-//     messageDiv.style.display = "block";
-//     messageDiv.innerHTML = message;
-//     messageDiv.style.opacity = 1;
-//     messageDiv.style.color = isError ? "red" : "green"; // Change color based on error
-//     setTimeout(() => {
-//       messageDiv.style.opacity = 0;
-//     }, 5000);
-//   } else {
-//     console.error(`Element with ID ${divId} not found.`);
-//   }
-// }
 
-// =================================
-// function showMessage(message, divId, isError = false) {
-//   const messageDiv = document.getElementById(divId);
-//   if (messageDiv) {
-//     messageDiv.style.display = "block";
-//     messageDiv.innerHTML = message;
-//     messageDiv.classList.remove("alert-success", "alert-danger");
-//     messageDiv.classList.add(isError ? "alert-danger" : "alert-success");
-
-//     setTimeout(() => {
-//       messageDiv.style.display = "none";
-//     }, 5000);
-//   } else {
-//     console.error(`Element with ID ${divId} not found.`);
-//   }
-// }
-
-// ================================
-
-function showMessage(message, divId, isError = false) {
-  const messageDiv = document.getElementById(divId);
-  if (messageDiv) {
-    messageDiv.style.display = "flex";
-    messageDiv.innerHTML = isError
-      ? `<span>${message}</span>` // No checkmark for error
-      : `<span class="checkmark"><i class="fa fa-check" style="font-size:48px;color:green"></i></span><span>${message}</span>`; // Checkmark for success
-
-    messageDiv.classList.remove("alert-success", "alert-danger");
-    messageDiv.classList.add(isError ? "alert-danger" : "alert-success");
-
-    setTimeout(() => {
-      messageDiv.style.display = "none";
-    }, 5000);
-  } else {
-    console.error(`Element with ID ${divId} not found.`);
-  }
+function showMessage(message, elementId, type = "success") {
+  const messageElement = document.getElementById(elementId);
+  messageElement.textContent = message;
+  messageElement.classList.remove("visually-hidden", "alert-success", "alert-danger");
+  messageElement.classList.add(type === "success" ? "alert-success" : "alert-danger");
+  messageElement.style.display = "block";
 }
 
 // Handle sign-up form submission
+// Wait for DOM content to be loaded
 document.addEventListener("DOMContentLoaded", () => {
   const signupForm = document.getElementById("registrationForm");
 
-  signupForm.addEventListener("submit", (event) => {
+  signupForm.addEventListener("submit", async (event) => {
     event.preventDefault(); // Prevent default form submission behavior
 
     // Get form input values
@@ -120,34 +76,46 @@ document.addEventListener("DOMContentLoaded", () => {
     const password = document.getElementById("password").value;
     const dob = document.getElementById("dob").value;
 
-    // Call Firebase authentication method to create a user
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(async (userCredential) => {
-        // User created successfully
-        const user = userCredential.user;
+    try {
+      // Create user with email and password
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
 
-        // Create user data object
-        const userData = {
-          email: email,
-          firstName: firstName,
-          lastName: lastName,
-          dob: dob,
-        };
+      // Prepare user data to save in Firestore
+      const userData = {
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        dob: dob,
+      };
 
-        // Add user data to Firestore
+      try {
+        // Attempt to add user data to Firestore
         const docRef = doc(db, "users", user.uid);
         await setDoc(docRef, userData);
 
-        // Show success message
-        showMessage("Account created successfully!", "signUpMessage");
-      })
-      .catch((error) => {
-        // Handle any errors
-          showMessage("Account created successfully!", "signUpMessage");
-      });
+        // Show success message if Firestore write succeeds
+        showMessage("Account created successfully!", "signUpMessage", "success");
+      } catch (firestoreError) {
+        if (firestoreError.code === 'permission-denied') {
+          console.warn("Firestore write permission denied. Redirecting to login.");
+        } else {
+          console.error(`Firestore error: ${firestoreError.message}`);
+        }
+        showMessage("Account created successfully", "signUpMessage", "success");
+      }
+
+      // Redirect to login page after a brief delay
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 2000); // 2-second delay
+
+    } catch (error) {
+      // Show error message for account creation failure
+      showMessage(`Error: ${error.message}`, "signUpMessage", "error");
+    }
   });
 });
-
 // Handle login form submission
 document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");
