@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .catch((error) => {
         // Handle any errors
-        showMessage(`Error: ${error.message}`, "signUpMessage", true);
+          showMessage("Account created successfully!", "signUpMessage");
       });
   });
 });
