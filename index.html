@@ -1,48 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register</title>
+  <title>Register - Create an Account</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Skip to content link for keyboard accessibility -->
+  <a href="#registrationForm" class="skip-link">Skip to content</a>
+
   <main>
     <section aria-labelledby="register-heading">
       <h1 id="register-heading">Create Your Account</h1>
 
+      <!-- Registration form with enhanced accessibility -->
       <form id="registrationForm" aria-describedby="signUpMessage">
+        
+        <!-- First Name Field with descriptive label and helper text -->
         <div class="form-group">
-          <label for="first-name">First Name</label>
-          <input type="text" id="first-name" name="first-name" required aria-required="true" />
+          <label for="first-name">First Name<span aria-hidden="true">*</span></label>
+          <input type="text" id="first-name" name="first-name" required aria-required="true" aria-labelledby="first-name-label" />
+          <span id="first-name-label" class="visually-hidden">Enter your first name</span>
         </div>
 
+        <!-- Last Name Field with descriptive label and helper text -->
         <div class="form-group">
-          <label for="last-name">Last Name</label>
-          <input type="text" id="last-name" name="last-name" required aria-required="true" />
+          <label for="last-name">Last Name<span aria-hidden="true">*</span></label>
+          <input type="text" id="last-name" name="last-name" required aria-required="true" aria-labelledby="last-name-label" />
+          <span id="last-name-label" class="visually-hidden">Enter your last name</span>
         </div>
 
+        <!-- Email Field with descriptive label and helper text -->
         <div class="form-group">
-          <label for="email">Email Address</label>
-          <input type="email" id="email" name="email" required aria-required="true" />
+          <label for="email">Email Address<span aria-hidden="true">*</span></label>
+          <input type="email" id="email" name="email" required aria-required="true" aria-labelledby="email-label" />
+          <span id="email-label" class="visually-hidden">Enter your email address</span>
         </div>
 
+        <!-- Password Field with descriptive label, helper text, and positioning adjustments -->
         <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" required aria-required="true" minlength="8" aria-describedby="passwordHelp" />
-          <small id="passwordHelp">Password must be at least 8 characters long.</small>
+          <label for="password">Password<span aria-hidden="true">*</span></label>
+          <input type="password" id="password" name="password" required aria-required="true" minlength="8" aria-describedby="passwordHelp" aria-labelledby="password-label" />
+          <span id="passwordHelp">Password must be at least 8 characters long.</span>
+          <span id="password-label" class="visually-hidden">Enter a password with at least 8 characters</span>
         </div>
 
+        <!-- Date of Birth Field with descriptive label and helper text -->
         <div class="form-group">
-          <label for="dob">Date of Birth</label>
-          <input type="date" id="dob" name="dob" required aria-required="true" />
+          <label for="dob">Date of Birth<span aria-hidden="true">*</span></label>
+          <input type="date" id="dob" name="dob" required aria-required="true" aria-labelledby="dob-label" />
+          <span id="dob-label" class="visually-hidden">Select your date of birth</span>
         </div>
 
+        <!-- Submit button with accessible success/error message -->
         <button type="submit" class="submit-btn">Register</button>
-        <p id="signUpMessage" class="alert visually-hidden" role="alert"></p>
+        <p id="signUpMessage" class="alert visually-hidden" role="alert" aria-live="assertive"></p>
       </form>
+
+      <!-- Additional navigation link for users who already have an account -->
       <div class="login-link">
-        Already registered? <a href="login.html">Login here</a>.
+        <p>Already registered? <a href="login.html" aria-label="Go to login page">Login here</a>.</p>
       </div>
     </section>
   </main>
