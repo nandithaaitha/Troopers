@@ -26,6 +26,13 @@ body {
     color: #ffffff; /* Set the heading color to white */
     margin-bottom: 20px;
 }
+
+.form-box p {
+    text-align: center;
+    font-size: 1rem;
+    color: #ffffff; /* Set the heading color to white */
+    margin-bottom: 20px;
+}
   
 .form-box {
     background-color: #000;
