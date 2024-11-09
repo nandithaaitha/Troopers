@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -11,8 +11,9 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    color: #ffffff;
 }
-  
+
 .container {
     display: flex;
     justify-content: center;
@@ -20,86 +21,69 @@ body {
     height: 100%;
 }
 
-.form-box h1 {
+.form-box {
+    background-color: #222;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     text-align: center;
-    font-size: 1.8rem;
-    color: #ffffff; /* Set the heading color to white */
-    margin-bottom: 20px;
+    width: 360px;
 }
 
-.form-box p {
-    text-align: center;
-    font-size: 1rem;
-    color: #ffffff; /* Set the heading color to white */
-    margin-bottom: 20px;
-}
-  
-.form-box {
-    background-color: #000;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: left;
-    width: 400px; 
-}
-  
 .form-box h2 {
     color: #fff;
-    text-align: center;
+    font-size: 2rem;
     margin-bottom: 20px;
 }
   
-.form-label {
-    color: #fff;
-    margin-bottom: 5px;
-}
-  
-input {
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"] {
     width: 100%;
-    padding: 12px; 
-    margin: 10px 0;
-    border-radius: 5px;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 8px;
     border: 1px solid #444;
-    background-color: #3d3d3d;
+    background-color: #333;
     color: #fff;
+    font-size: 1rem;
 }
-  
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+input[type="date"]::placeholder {
+    color: #bbb;
+}
+
 .create-user {
     width: 100%;
     padding: 12px;
-    background-color: blue;
+    background-color: #4CAF50; /* Green color */
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
     margin-top: 20px;
 }
-  
+
 .create-user:hover {
-    background-color: #0056b3;
+    background-color: #45a049; /* Slightly darker green */
 }
-  
-/* .exist-link {
-    color: #fff;
-    margin-top: 20px;
-    text-align: center;
-    cursor: pointer;
-} */
-  
-/* .exist-link:hover {
-    color: #ccc;
-} */
 
 .exist-link {
-    display: inline-block;
-    margin-top: 10px;
-    color: #007bff;
+    display: block;
+    margin-top: 15px;
+    color: #1E90FF;
+    font-size: 0.9rem;
     text-decoration: none;
 }
 
 .exist-link:hover {
-    color: #0056b3;
+    color: #1c86ee;
     text-decoration: underline;
 }
-  

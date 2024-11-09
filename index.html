@@ -13,70 +13,18 @@
     />
     <script type="module" src="./js/firebaseauth.js"></script>
   </head>
-  <body dir="ltr">
+  <body>
     <div class="container">
       <div class="form-box">
         <h2>Registration</h2>
-        <!-- Signup Success Message -->
-        <div
-          id="signUpMessage"
-          class="alert alert-success"
-          role="alert"
-          style="display: none"
-        ></div>
+        <div id="signUpMessage" class="alert alert-success" style="display: none"></div>
         <form id="registrationForm">
-          <label for="first-name" class="form-label">First Name</label>
-          <input
-            type="text"
-            id="first-name"
-            name="first_name"
-            class="form-control"
-            required
-          />
-
-          <label for="last-name" class="form-label">Last Name</label>
-          <input
-            type="text"
-            id="last-name"
-            name="last_name"
-            class="form-control"
-            required
-          />
-
-          <label for="email" class="form-label">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            class="form-control"
-            required
-          />
-
-          <label for="password" class="form-label">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            class="form-control"
-            required
-          />
-
-          <label for="dob" class="form-label">Date of Birth</label>
-          <input
-            type="date"
-            id="dob"
-            name="dob"
-            class="form-control"
-            required
-          />
-
-          <button
-            type="submit"
-            id="submitSignup"
-            class="create-user btn btn-primary mt-3"
-          >
-            Create User
-          </button>
+          <input type="text" id="first-name" placeholder="First Name" class="form-control" required />
+          <input type="text" id="last-name" placeholder="Last Name" class="form-control" required />
+          <input type="email" id="email" placeholder="Email" class="form-control" required />
+          <input type="password" id="password" placeholder="Password" class="form-control" required />
+          <input type="date" id="dob" class="form-control" required />
+          <button type="submit" id="submitSignup" class="create-user">Create User</button>
         </form>
         <a href="login.html" class="exist-link">Already registered? Log in here.</a>
       </div>
