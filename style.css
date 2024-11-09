@@ -19,6 +19,13 @@ body {
     align-items: center;
     height: 100%;
 }
+
+.form-box h1 {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #ffffff; /* Set the heading color to white */
+    margin-bottom: 20px;
+}
   
 .form-box {
     background-color: #000;
