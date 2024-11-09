@@ -15,10 +15,13 @@
 <body>
     <div id="nav-placeholder"></div>
     <script>
-      $(function () {
-        $("#nav-placeholder").load("navbar.html");
-      });
-    </script>
+        $(document).ready(function () {
+          $("#nav-placeholder").load("navbar.html", function () {
+            // Reapply theme after loading navbar
+            applyTheme();
+          });
+        });
+      </script>
   </head>
   <body>
     <div id="nav-placeholder"></div>

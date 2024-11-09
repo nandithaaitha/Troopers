@@ -33,11 +33,14 @@
         text-align: center;
       }
     </style>
-    <script>
-      $(document).ready(function () {
-        $("#nav-placeholder").load("navbar.html");
-      });
-    </script>
+<script>
+  $(document).ready(function () {
+    $("#nav-placeholder").load("navbar.html", function () {
+      // Reapply theme after loading navbar
+      applyTheme();
+    });
+  });
+</script>
   </head>
   <body>
     <!-- Navbar Placeholder -->

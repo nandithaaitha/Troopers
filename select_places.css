@@ -186,4 +186,9 @@ footer {
     max-height: 500px;
     overflow-y: auto;
 }
+#theme-toggle {
+    color: #333;
+    border-color: #333;
+    width: 60px;
+}
 

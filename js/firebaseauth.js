@@ -350,16 +350,17 @@ function renderFeedbackCarousel(feedbacks) {
         carouselItem.classList.add("active"); // Make the first item active
       }
 
-      // Generate star rating HTML
+      // Generate star rating HTML based on feedback.rating
       let starsHtml = "";
       const rating = parseInt(feedback.rating, 10); // Ensure rating is an integer
 
       for (let i = 1; i <= 5; i++) {
         starsHtml +=
           i <= rating
-            ? `<span class="fa fa-star checked"></span>`
-            : `<span class="fa fa-star"></span>`;
+            ? `<span class="fa fa-star checked" style="color: gold;"></span>`
+            : `<span class="fa fa-star" style="color: lightgray;"></span>`; // Empty star for remaining
       }
+
 
       // Create the HTML structure for each feedback item
       carouselItem.innerHTML = `
