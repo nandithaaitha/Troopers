@@ -2,111 +2,113 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
+  }
+  
+  body {
     font-family: Arial, sans-serif;
-    background-color: #1a1a1a;
-    color: #ffffff;
+    background-color: #f5f5f5;
+    color: #333;
+  }
+  
+  main {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-}
-
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
     padding: 20px;
-}
-
-.form-box {
-    background-color: #222;
-    padding: 40px 30px;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  section {
     width: 100%;
     max-width: 400px;
-}
-
-.form-box h2 {
-    color: #fff;
-    font-size: 2rem;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    font-size: 24px;
     margin-bottom: 20px;
-}
-
-.alert {
-    font-size: 1rem;
+    color: #333;
     text-align: center;
+  }
+  
+  .form-group {
     margin-bottom: 15px;
-    display: none; /* Hidden by default; can be controlled dynamically */
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="date"] {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 8px;
-    border: 1px solid #444;
-    background-color: #333;
-    color: #fff;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus,
-input[type="date"]:focus {
-    border-color: #1E90FF;
-    outline: none;
-}
-
-input[type="text"]::placeholder,
-input[type="email"]::placeholder,
-input[type="password"]::placeholder,
-input[type="date"]::placeholder {
-    color: #bbb;
-}
-
-.create-user {
-    width: 100%;
-    padding: 12px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-top: 20px;
-}
-
-.create-user:hover {
-    background-color: #45a049;
-    transform: translateY(-2px);
-}
-
-.create-user:focus {
-    outline: 2px solid #ffffff;
-}
-
-.exist-link {
+  }
+  
+  label {
     display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+  }
+  
+  input:focus {
+    border-color: #007bff;
+  }
+  
+  button.submit-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button.submit-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .alert {
     margin-top: 15px;
-    color: #1E90FF;
-    font-size: 0.9rem;
-    text-decoration: none;
+    padding: 10px;
+    border-radius: 4px;
     text-align: center;
-}
+    display: none;
+  }
+  
+  .alert-success {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+  .visually-hidden {
+    display: none;
+  }
 
-.exist-link:hover {
-    color: #1c86ee;
+  .login-link {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+  }
+
+  .login-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .login-link a:hover {
     text-decoration: underline;
-}
+  }
