@@ -31,15 +31,20 @@
     <h2 style="color: green; text-align: center">Frequently Asked Question</h2>
     <div class="layout">
       <div class="accordion">
-        <div class="accordion__question">
-          <p>What documents do I need for international travel?</p>
-        </div>
-        <div class="accordion__answer">
+        <button
+          class="accordion__question"
+          aria-expanded="false"
+          aria-controls="answer1"
+        >
+          What documents do I need for international travel?
+        </button>
+        <div class="accordion__answer" id="answer1">
           <p>
-            For international travel, you typically need a valid passport and,
-            in many cases, a visa for the destination country.
+            For international travel, you typically need a valid passport and, in
+            many cases, a visa for the destination country.
           </p>
         </div>
+      </div>
       </div>
 
       <div class="accordion">
@@ -117,7 +122,9 @@
         </li>
       </ul>
       <div class="chat-input">
+        <label for="chatMessage" class="sr-only">Enter your message</label>
         <textarea
+          id="chatMessage"
           placeholder="Enter a message..."
           spellcheck="false"
           required
