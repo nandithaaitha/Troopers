@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+.navbar-light .navbar-nav .nav-link {
+    color: #343a40;
+}
+
+
 body {
     font-family: Arial, sans-serif;
 }
