@@ -24,7 +24,6 @@
       </script>
   </head>
   <body>
-    <div id="nav-placeholder"></div>
 
     <section class="main3">
         <div class="container">
@@ -35,7 +34,7 @@
                     <div class="card" style="width: 234px; height: 321px;">
                         <img src="./img/Gas-Station.jpg" class="card-img-top" alt="Gas Station" />
                         <div class="card-body">
-                            <h5 class="card-title">Gas Station</h5>
+                            <h2 class="card-title">Gas Station</h2>
                             <p class="card-text">Find accessible gas stations.</p>
                             <button class="btn11">Show Places</button>
                         </div>
@@ -43,7 +42,7 @@
                     <div class="card" style="width: 234px; height: 321px;">
                         <img src="./img/hotel.jpg" class="card-img-top" alt="Hotel" />
                         <div class="card-body">
-                            <h5 class="card-title">Hotels</h5>
+                            <h2 class="card-title">Hotels</h2>
                             <p class="card-text">Discover accessible hotels.</p>
                             <button class="btn11">Show Places</button>
                         </div>
@@ -51,7 +50,7 @@
                     <div class="card" style="width: 234px; height: 321px;">
                         <img src="./img/Libraries.jpg" class="card-img-top" alt="Library" />
                         <div class="card-body">
-                            <h5 class="card-title">Libraries</h5>
+                            <h2 class="card-title">Libraries</h2>
                             <p class="card-text">Explore accessible libraries.</p>
                             <button class="btn11">Show Places</button>
                         </div>
@@ -59,7 +58,7 @@
                     <div class="card" style="width: 234px; height: 321px;">
                       <img src="./img/resturant.jpg" class="card-img-top" alt="Restaurant" />
                       <div class="card-body">
-                          <h5 class="card-title">Restaurants</h5>
+                          <h2 class="card-title">Restaurants</h2>
                           <p class="card-text">Discover accessible restaurants</p>
                           <button class="btn11">Show Places</button>
                       </div>
@@ -67,7 +66,7 @@
                     <div class="card" style="width: 234px; height: 321px;">
                         <img src="./img/DALLAS.jpg" class="card-img-top" alt="Tourist Attraction" />
                         <div class="card-body">
-                            <h5 class="card-title">Tourist Attraction</h5>
+                            <h2 class="card-title">Tourist Attraction</h2>
                             <p class="card-text">Visit accessible tourist spots.</p>
                             <button class="btn11">Show Places</button>
                         </div>
@@ -75,7 +74,7 @@
                     <div class="card" style="width: 234px; height: 321px;">
                       <img src="./img/shopping.jpg" class="card-img-top" alt="Restaurant" />
                       <div class="card-body">
-                          <h5 class="card-title">Shopping Malls</h5>
+                          <h2 class="card-title">Shopping Malls</h2>
                           <p class="card-text">Discover accessible shopping malls</p>
                           <button class="btn11">Show Places</button>
                       </div>
@@ -83,7 +82,7 @@
                   <div class="card" style="width: 234px; height: 321px;">
                     <img src="./img/transport.jpeg" class="card-img-top" alt="Restaurant" />
                     <div class="card-body">
-                        <h5 class="card-title">Public Transportation</h5>
+                        <h2 class="card-title">Public Transportation</h2>
                         <p class="card-text">Discover accessible public Transportation</p>
                         <button class="btn11">Show Places</button>
                     </div>
@@ -98,7 +97,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="placeItemsModalLabel">Place Details</h5>
+                    <h2 class="modal-title" id="placeItemsModalLabel">Place Details</h2>
                     <label for="searchInput" class="sr-only">Search Places</label>
                     <input type="text" id="searchInput" placeholder="Search by name..." class="form-control ml-3" />
                 </div>
@@ -181,7 +180,7 @@
         listItem.classList.add("list-group-item", "mb-3", "p-3", "text-center");
 
         listItem.innerHTML = `
-            <h5>${name}</h5>
+            <h2>${name}</h2>
             <p><strong>Location:</strong> ${location}</p>
             <p><strong>Accessibility:</strong> ${accessibility}</p>
             <p><strong>User Rating:</strong> ${rating}</p>
@@ -235,7 +234,7 @@ document.addEventListener("click", function(event) {
             const listItems = document.querySelectorAll("#related-items-list .list-group-item");
 
             listItems.forEach(item => {
-                const placeName = item.querySelector("h5").textContent.toLowerCase();
+                const placeName = item.querySelector("h2").textContent.toLowerCase();
                 if (placeName.includes(searchTerm)) {
                     item.style.display = "";
                 } else {
