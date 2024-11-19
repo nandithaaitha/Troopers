@@ -218,3 +218,14 @@ footer .contact-icon {
     border-radius: 50%;
     display: inline-block;
 }
+
+.btn-outline-info {
+    color: #087990;
+    border-color: #087990;
+  }
+  
+  .btn-outline-info:hover {
+    color: #ffffff;
+    background-color: #087990;
+    border-color: #087990;
+  }
