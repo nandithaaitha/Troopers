@@ -62,7 +62,7 @@ async function fetchWeather(city, elementId) {
     // Display the data in the specified element
     document.getElementById(elementId).innerHTML = `
       <p class="weather-status">${currentWeather}</p>
-      <div class="forecast-container">
+      <div class="forecast-container" tabindex="0" onkeydown="scrollContent(event, this)">
         ${hourlyForecasts.join('')}
       </div>
       <p class="weather-status">${estimatedWeather}</p>
@@ -77,3 +77,14 @@ fetchWeather("Denton", "denton-weather");
 fetchWeather("Dallas", "dallas-weather");
 fetchWeather("Austin", "austin-weather");
 fetchWeather("San Antonio", "sanantonio-weather");
+
+function scrollContent(e, element) {
+  switch (e.keyCode) {
+    case 38: // Up arrow
+      element.scrollTop -= 50;
+      break;
+    case 40: // Down arrow
+      element.scrollTop += 50;
+      break;
+  }
+}
