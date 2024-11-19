@@ -39,11 +39,6 @@
         text-align: center;
         margin-top: 2rem;
       }
-      .btn-outline-primary {
-        display: block;
-        margin: auto;
-        width: 40%;
-      }
       form {
         background-color: #fff;
         padding: 2rem;
@@ -52,6 +47,45 @@
         margin: 2rem auto;
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
       }
+      /* Default Button Styling */
+/* General Button Styling */
+.btn-outline-primary {
+    color: #0056b3; /* Improved darker blue for light mode */
+    border-color: #0056b3;
+    background-color: transparent; /* Transparent by default */
+    font-weight: bold; /* Enhanced readability */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Hover and Focus States */
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+    color: #ffffff; /* White text for better visibility */
+    background-color: #0056b3; /* Blue background */
+    border-color: #0056b3;
+}
+
+/* Light Mode Styles */
+body.light-mode .btn-outline-primary {
+    color: #0056b3; /* High-contrast darker blue */
+    border-color: #0056b3;
+}
+
+/* Dark Mode Styles */
+body.dark-mode .btn-outline-primary {
+    color: #80bfff; /* Lighter blue for better contrast on dark background */
+    border-color: #80bfff;
+    background-color: transparent;
+}
+
+body.dark-mode .btn-outline-primary:hover,
+body.dark-mode .btn-outline-primary:focus {
+    color: #121212; /* Dark text */
+    background-color: #80bfff; /* Lighter blue background */
+    border-color: #80bfff;
+}
+
+
     </style>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
@@ -158,9 +192,17 @@
               <!-- Dynamic questions will appear here based on the selection -->
             </div>
 
-            <button type="submit" class="btn btn-outline-primary">
-              Submit Request
-            </button>
+            <button type="submit" class="btn btn-outline-primary" 
+            style="
+                color: #0056b3; /* Darker blue text for higher contrast */
+                background-color: #ffffff; /* White background for light mode */
+                border: 2px solid #0056b3; /* Border matches text color */
+                font-weight: bold; /* Bold text for better readability */
+                padding: 10px 20px; /* Add padding for a larger click area */
+                border-radius: 6px; /* Rounded corners for aesthetics */
+            ">
+            Submit Request
+        </button>
           </form>
         </div>
       </div>
