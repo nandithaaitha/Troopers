@@ -126,6 +126,64 @@ body.dark-mode .card-title {
     border: 1px solid #444; /* Optional border for structure */
 }
 
+/* General Styling for Carousel Controls */
+.carousel-control-prev,
+.carousel-control-next {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Rounded buttons */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Light Mode Styles */
+body.light-mode .carousel-control-prev,
+body.light-mode .carousel-control-next {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+}
+
+body.light-mode .carousel-control-prev-icon,
+body.light-mode .carousel-control-next-icon {
+    background-image: url('data:image/svg+xml;charset=utf8,<svg xmlns="http://www.w3.org/2000/svg" fill=\'%23fff\' viewBox="0 0 8 8"><path d="M4 0L0 4l4 4V5h4V3H4V0z"/></svg>'); /* White icon */
+}
+
+/* Dark Mode Styles */
+body.dark-mode .carousel-control-prev,
+body.dark-mode .carousel-control-next {
+    background-color: rgba(255, 255, 255, 0.3); /* Semi-transparent white for contrast */
+}
+
+body.dark-mode .carousel-control-prev-icon,
+body.dark-mode .carousel-control-next-icon {
+    background-image: url('data:image/svg+xml;charset=utf8,<svg xmlns="http://www.w3.org/2000/svg" fill=\'%23000\' viewBox="0 0 8 8"><path d="M4 0L0 4l4 4V5h4V3H4V0z"/></svg>'); /* Black icon */
+}
+
+/* Hover and Focus Effects */
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background-color: rgba(0, 0, 0, 0.7); /* Darker background for light mode */
+}
+
+body.dark-mode .carousel-control-prev:hover,
+body.dark-mode .carousel-control-next:hover {
+    background-color: rgba(255, 255, 255, 0.5); /* Lighter background for dark mode */
+}
+
+/* Focus Styles for Accessibility */
+.carousel-control-prev:focus,
+.carousel-control-next:focus {
+    outline: 3px solid #80ff80; /* High contrast outline for dark mode */
+    outline-offset: 2px;
+}
+
+body.dark-mode .carousel-control-prev:focus,
+body.dark-mode .carousel-control-next:focus {
+    outline: 3px solid #ffcc00; /* Bright outline for dark mode */
+}
+
 .card-text {
     color: #000;
 }

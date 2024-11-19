@@ -47,6 +47,39 @@ body.dark-mode p {
   padding: 8px; /* Optional: Add padding for better readability */
 }
 
+/* General Screen-Reader-Only Styling */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* Make Screen-Reader-Only Text Visible for Focus (Optional) */
+.sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 5px;
+  margin: 0;
+  clip: auto;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #000;
+  z-index: 100; /* Ensure visibility over other elements */
+}
+
+/* Dark Mode Adjustments for Focusable Text */
+body.dark-mode .sr-only-focusable:focus {
+  border: 1px solid #80ff80; /* High-contrast green border */
+  background-color: #333; /* Dark background for focusable text */
+  color: #f0f0f0; /* Light text for readability */
+}
+
 body.dark-mode .hero-text p {
   color: white;
 }
