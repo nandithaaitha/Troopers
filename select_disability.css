@@ -92,6 +92,28 @@ body.dark-mode .card-title {
     border-color: #0056b3;
   }
 
+
+  .card-title {
+    opacity: 1 !important; /* Ensure visibility */
+    padding: 10px; /* Add padding for better readability */
+    border-radius: 6px; /* Add subtle rounded corners */
+    text-align: center; /* Center-align text */
+    transition: background-color 0.3s, color 0.3s ease-in-out;
+}
+
+/* Light Mode Styling for .card-title */
+body.light-mode .card-title {
+    color: #000 !important; /* Black text for high contrast in light mode */
+    background-color: #fff !important; /* White background */
+}
+
+/* Dark Mode Styling for .card-title */
+body.dark-mode .card-title {
+    color: #f0f0f0 !important; /* Light text for contrast */
+    background-color: #333 !important; /* Dark background */
+    border: 1px solid #444; /* Optional border for structure */
+}
+
 /* Footer */
 footer {
     position: fixed;
