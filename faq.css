@@ -38,6 +38,15 @@ body.dark-mode .hero-text h1 {
   color: green;
 }
 
+/* Adjust paragraph styles for dark mode */
+body.dark-mode p {
+  color: #ffffff !important; /* Ensure high contrast text */
+  background-color: #333333 !important; /* Darker background for contrast */
+  opacity: 1 !important; /* Ensure visibility */
+  border-radius: 5px; /* Optional: Add a subtle border radius for aesthetics */
+  padding: 8px; /* Optional: Add padding for better readability */
+}
+
 body.dark-mode .hero-text p {
   color: white;
 }

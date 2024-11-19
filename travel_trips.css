@@ -112,3 +112,16 @@ footer {
     margin-top: 20px;
 }
 
+
+body.light-mode h1{
+
+        color: #000 !important; /* Black text for high contrast in light mode */
+        background-color: #fff !important; /* White background */
+      
+}
+      /* Dark Mode Styling for .card-title */
+      body.dark-mode h1 {
+        color: #f0f0f0 !important; /* Light text for contrast */
+        background-color: #333 !important; /* Dark background */
+        border: 1px solid #444; /* Optional border for structure */
+      }
