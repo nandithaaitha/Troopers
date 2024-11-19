@@ -23,6 +23,73 @@ body.dark-mode .card-text{
 }
 
 
+/* Improved Link Contrast for List Items */
+.list-group-item a {
+    color: #0056b3; /* Darker blue for better contrast */
+    text-decoration: underline; /* Optional: Add underline for accessibility */
+}
+
+/* Hover and Focus Styles */
+.list-group-item a:hover,
+.list-group-item a:focus {
+    color: #003f7f; /* Even darker blue for hover/focus */
+    text-decoration: underline;
+}
+
+/* Optional: Light Theme Adjustments */
+body.light-mode .list-group-item a {
+    color: #0056b3; /* Light mode-specific link color */
+}
+
+/* Dark Mode Adjustments */
+body.dark-mode .list-group-item {
+    background-color: #121212; /* Dark background */
+    color: #f0f0f0; /* Light text */
+}
+
+body.dark-mode .list-group-item a {
+    color: #80d4ff; /* Light blue link for dark mode */
+}
+
+/* Default Button Styling */
+.btn-outline-danger {
+    color: #dc3545; /* Default Bootstrap danger color */
+    border-color: #dc3545;
+    background-color: transparent;
+    transition: color 0.3s, border-color 0.3s, background-color 0.3s ease-in-out;
+}
+
+/* Light Mode Adjustments */
+body.light-mode .btn-outline-danger {
+    color: #dc3545; /* Standard danger red */
+    background-color: transparent; /* Transparent background */
+}
+
+/* Dark Mode Adjustments */
+body.dark-mode .btn-outline-danger {
+    color: #ff6f6f; /* Lighter red for contrast */
+    border-color: #ff6f6f;
+    background-color: transparent;
+}
+
+/* Hover and Focus States */
+.btn-outline-danger:hover,
+.btn-outline-danger:focus {
+    color: #ffffff; /* White text for better visibility */
+    background-color: #ff6f6f; /* Lighter red background */
+    border-color: #ff6f6f; /* Match border with background */
+}
+
+/* Dark Mode Hover and Focus */
+body.dark-mode .btn-outline-danger:hover,
+body.dark-mode .btn-outline-danger:focus {
+    color: #121212; /* Dark text */
+    background-color: #ff6f6f; /* Lighter red background */
+    border-color: #ff6f6f;
+}
+
+
+
 /* ==================== */
 
 .navbar-brand{
