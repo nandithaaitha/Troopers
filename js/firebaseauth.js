@@ -305,8 +305,8 @@ function renderFeedbackCarousel(feedbacks) {
   if (feedbacks.length === 0) {
     carouselItems.innerHTML = `
       <div class="carousel-item active">
-        <div class="d-flex flex-column align-items-center text-center">
-          <p>No feedback available at the moment.</p>
+        <div class="d-flex flex-column align-items-center text-center" style="color: #000000; background-color: #f8f9fa; padding: 20px; border-radius: 8px;">
+          <p style="font-weight: 500;">No feedback available at the moment.</p>
         </div>
       </div>
     `;
@@ -318,35 +318,54 @@ function renderFeedbackCarousel(feedbacks) {
         carouselItem.classList.add("active"); // Make the first item active
       }
 
-      // Generate star rating HTML based on feedback.rating
+      // Generate star rating HTML with improved contrast
       let starsHtml = "";
       const rating = parseInt(feedback.rating, 10); // Ensure rating is an integer
 
       for (let i = 1; i <= 5; i++) {
         starsHtml +=
           i <= rating
-            ? `<span class="fa fa-star checked" style="color: gold;"></span>`
-            : `<span class="fa fa-star" style="color: lightgray;"></span>`; // Empty star for remaining
+            ? `<span class="fa fa-star checked" style="color: #ffd700; text-shadow: 0 0 3px rgba(0,0,0,0.3);"></span>`
+            : `<span class="fa fa-star" style="color: #6c757d;"></span>`; // Empty star for remaining
       }
 
-
-      // Create the HTML structure for each feedback item
+      // Create the HTML structure with improved color contrast
       carouselItem.innerHTML = `
-      
-        <div class="card" style="width:18rem">
-          <div class="card-body">
-            <div className="cardTitle">
-              <div class="cardImg">
-                <img src="${feedback.userImage}" class="rounded-circle mb-3" alt="User Image">
-                <h5 class="card-title">${feedback.username}</h5>
+        <div class="card" style="
+          width: 18rem; 
+          background-color: #ffffff; 
+          border: 1px solid #dee2e6; 
+          border-radius: 8px; 
+          box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        ">
+          <div class="card-body" style="color: #000000;">
+            <div class="cardTitle d-flex flex-column align-items-center">
+              <div class="cardImg text-center mb-3">
+                <img 
+                  src="${feedback.userImage}" 
+                  class="rounded-circle mb-2" 
+                  alt="User Image" 
+                  style="width: 100px; height: 100px; object-fit: cover; border: 3px solid #087990;"
+                >
+                <h5 class="card-title" style="color: #000000; font-weight: 600;">${feedback.username}</h5>
               </div>
-              <div class="cardStar mb-3">${starsHtml}</div>
-          </div>
+              <div class="cardStar mb-3" aria-label="Rating: ${rating} out of 5 stars">
+                ${starsHtml}
+              </div>
+            </div>
 
-          <p class="card-text">${feedback.feedbackMessage}</p>
+            <p class="card-text" style="
+              color: #212529; 
+              font-weight: 400; 
+              line-height: 1.6;
+              background-color: #f8f9fa; 
+              padding: 10px; 
+              border-radius: 4px;
+            ">
+              ${feedback.feedbackMessage}
+            </p>
           </div>
         </div>
-      
       `;
 
       carouselItems.appendChild(carouselItem);
