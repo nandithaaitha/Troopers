@@ -23,7 +23,8 @@ import {
   query,
   where,
   addDoc,
-  deleteDoc, getDoc,
+  deleteDoc, 
+  getDoc,
   orderBy,
   serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
@@ -52,126 +53,163 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
-
 function showMessage(message, elementId, type = "success") {
   const messageElement = document.getElementById(elementId);
-  messageElement.textContent = message;
-  messageElement.classList.remove("visually-hidden", "alert-success", "alert-danger");
-  messageElement.classList.add(type === "success" ? "alert-success" : "alert-danger");
-  messageElement.style.display = "block";
+  if (messageElement) {
+    messageElement.textContent = message;
+    messageElement.classList.remove("visually-hidden", "alert-success", "alert-danger");
+    messageElement.classList.add(type === "success" ? "alert-success" : "alert-danger");
+    messageElement.style.display = "block";
+  }
 }
 
 // Handle sign-up form submission
-// Wait for DOM content to be loaded
 document.addEventListener("DOMContentLoaded", () => {
   const signupForm = document.getElementById("registrationForm");
 
-  signupForm.addEventListener("submit", async (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
+  if (signupForm) {
+    signupForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
 
-    // Get form input values
-    const firstName = document.getElementById("first-name").value;
-    const lastName = document.getElementById("last-name").value;
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    const dob = document.getElementById("dob").value;
-
-    try {
-      // Create user with email and password
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
-
-      // Prepare user data to save in Firestore
-      const userData = {
-        email: email,
-        firstName: firstName,
-        lastName: lastName,
-        dob: dob,
-      };
+      // Get form input values
+      const firstName = document.getElementById("first-name").value;
+      const lastName = document.getElementById("last-name").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const dob = document.getElementById("dob").value;
 
       try {
-        // Attempt to add user data to Firestore
-        const docRef = doc(db, "users", user.uid);
-        await setDoc(docRef, userData);
+        // Create user with email and password
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
 
-        // Show success message if Firestore write succeeds
-        showMessage("Account created successfully!", "signUpMessage", "success");
-      } catch (firestoreError) {
-        if (firestoreError.code === 'permission-denied') {
-          console.warn("Firestore write permission denied. Redirecting to login.");
-        } else {
-          console.error(`Firestore error: ${firestoreError.message}`);
+        // Prepare user data to save in Firestore
+        const userData = {
+          email: email,
+          firstName: firstName,
+          lastName: lastName,
+          dob: dob,
+          createdAt: serverTimestamp(),
+        };
+
+        try {
+          // Attempt to add user data to Firestore
+          const docRef = doc(db, "users", user.uid);
+          await setDoc(docRef, userData);
+          console.log("User data saved to Firestore successfully");
+        } catch (firestoreError) {
+          // Log the error but don't show it to user since account was created
+          console.warn("Firestore write failed:", firestoreError.message);
         }
-        showMessage("Account created successfully", "signUpMessage", "success");
+
+        // Show success message
+        showMessage("Account created successfully! Redirecting to login...", "signUpMessage", "success");
+
+        // Redirect to login page after a brief delay
+        setTimeout(() => {
+          window.location.href = "login.html";
+        }, 2000);
+
+      } catch (error) {
+        // Handle specific Firebase Auth errors
+        let errorMessage = "An error occurred during registration.";
+        
+        switch (error.code) {
+          case 'auth/email-already-in-use':
+            errorMessage = "This email is already registered. Please use a different email.";
+            break;
+          case 'auth/weak-password':
+            errorMessage = "Password is too weak. Please choose a stronger password.";
+            break;
+          case 'auth/invalid-email':
+            errorMessage = "Please enter a valid email address.";
+            break;
+          case 'auth/network-request-failed':
+            errorMessage = "Network error. Please check your connection and try again.";
+            break;
+          default:
+            errorMessage = `Registration failed: ${error.message}`;
+        }
+        
+        showMessage(errorMessage, "signUpMessage", "error");
       }
-
-      // Redirect to login page after a brief delay
-      setTimeout(() => {
-        window.location.href = "login.html";
-      }, 2000); // 2-second delay
-
-    } catch (error) {
-      // Show error message for account creation failure
-      showMessage(`Error: ${error.message}`, "signUpMessage", "error");
-    }
-  });
+    });
+  }
 });
+
 // Handle login form submission
 document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");
 
-  loginForm.addEventListener("submit", (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
+  if (loginForm) {
+    loginForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
 
-    // Get form input values
-    const email = document.getElementById("login-email").value;
-    const password = document.getElementById("login-password").value;
+      // Get form input values
+      const email = document.getElementById("login-email").value;
+      const password = document.getElementById("login-password").value;
 
-    // Sign in with Firebase Authentication
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
-        showMessage("Login successful!", "signInMessage");
+        showMessage("Login successful! Redirecting...", "signInMessage", "success");
 
-        // ========================
-        // Clear the localStorage flag so the welcome message shows once after login
-        // localStorage.removeItem("hasShownWelcome");
+        // Set welcome message flag
         localStorage.setItem("showWelcomeMessage", "true");
 
-        // =======================
-        // Redirect to the home page or dashboard
-        window.location.href = "home.html";
-      })
-      .catch((error) => {
-        showMessage(`Error: ${error.message}`, "signInMessage", true);
-      });
-  });
+        // Redirect to the home page
+        setTimeout(() => {
+          window.location.href = "home.html";
+        }, 1000);
+
+      } catch (error) {
+        let errorMessage = "Login failed.";
+        
+        switch (error.code) {
+          case 'auth/user-not-found':
+            errorMessage = "No account found with this email address.";
+            break;
+          case 'auth/wrong-password':
+            errorMessage = "Incorrect password. Please try again.";
+            break;
+          case 'auth/invalid-email':
+            errorMessage = "Please enter a valid email address.";
+            break;
+          case 'auth/too-many-requests':
+            errorMessage = "Too many failed attempts. Please try again later.";
+            break;
+          default:
+            errorMessage = `Login failed: ${error.message}`;
+        }
+        
+        showMessage(errorMessage, "signInMessage", "error");
+      }
+    });
+  }
 });
 
 // Function to handle forgot password
 document.addEventListener("DOMContentLoaded", () => {
   const forgotPasswordLink = document.getElementById("forgotPasswordLink");
 
-  forgotPasswordLink.addEventListener("click", () => {
-    const email = document.getElementById("login-email").value;
+  if (forgotPasswordLink) {
+    forgotPasswordLink.addEventListener("click", async (event) => {
+      event.preventDefault();
+      
+      const email = document.getElementById("login-email").value;
 
-    if (email) {
-      // Send password reset email
-      sendPasswordResetEmail(auth, email)
-        .then(() => {
-          showMessage(
-            "Password reset email sent! Check your inbox.",
-            "signInMessage"
-          );
-          console.log(email, auth);
-        })
-        .catch((error) => {
-          showMessage(`Error: ${error.message}`, "signInMessage", true);
-        });
-    } else {
-      showMessage("Please enter your email address.", "signInMessage", true);
-    }
-  });
+      if (email) {
+        try {
+          await sendPasswordResetEmail(auth, email);
+          showMessage("Password reset email sent! Check your inbox.", "signInMessage", "success");
+        } catch (error) {
+          showMessage(`Error: ${error.message}`, "signInMessage", "error");
+        }
+      } else {
+        showMessage("Please enter your email address.", "signInMessage", "error");
+      }
+    });
+  }
 });
 
 // Function to add feedback to Firestore
@@ -184,72 +222,71 @@ async function addFeedback(feedbackData) {
       feedbackMessage: feedbackData.feedbackMessage,
       createdAt: serverTimestamp(),
     });
-    showMessage("Feedback submitted successfully!", "feedbackMessage");
+    showMessage("Feedback submitted successfully!", "feedbackMessage", "success");
   } catch (error) {
     console.error("Error adding feedback: ", error);
-    showMessage("Failed to submit feedback.", "feedbackMessage", true);
+    showMessage("Failed to submit feedback.", "feedbackMessage", "error");
   }
 }
 
 // Feedback submission functionality
-const feedbackForm = document.getElementById("feedbackForm");
-if (feedbackForm) {
-  feedbackForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
+  const feedbackForm = document.getElementById("feedbackForm");
+  
+  if (feedbackForm) {
+    feedbackForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
 
-    // Get form inputs
-    const username = document.getElementById("username").value.trim();
-    const userImage = document.getElementById("userImage").files[0]; // Get file object
-    const rating = document.getElementById("rating").value;
-    const feedbackMessage = document
-      .getElementById("feedbackMessage")
-      .value.trim();
+      // Get form inputs
+      const username = document.getElementById("username").value.trim();
+      const userImage = document.getElementById("userImage").files[0];
+      const rating = document.getElementById("rating").value;
+      const feedbackMessage = document.getElementById("feedbackMessage").value.trim();
 
-    // Basic validation
-    if (!username || !userImage || !rating || !feedbackMessage) {
-      showMessage("Please fill in all fields.", "feedbackMessage", true);
-      return;
-    }
+      // Basic validation
+      if (!username || !userImage || !rating || !feedbackMessage) {
+        showMessage("Please fill in all fields.", "feedbackMessage", "error");
+        return;
+      }
 
-    try {
-      // Upload image to Firebase Storage
-      const storageRef = ref(storage, `images/${userImage.name}`); // Create storage reference
-      const snapshot = await uploadBytes(storageRef, userImage);
+      try {
+        // Upload image to Firebase Storage
+        const storageRef = ref(storage, `images/${userImage.name}`);
+        const snapshot = await uploadBytes(storageRef, userImage);
 
-      // Get the file's download URL
-      const downloadURL = await getDownloadURL(snapshot.ref);
+        // Get the file's download URL
+        const downloadURL = await getDownloadURL(snapshot.ref);
 
-      // Create feedback data object with image URL
-      const feedbackData = {
-        username,
-        userImage: downloadURL, // Store the download URL, not the file object
-        rating: parseInt(rating),
-        feedbackMessage,
-      };
+        // Create feedback data object with image URL
+        const feedbackData = {
+          username,
+          userImage: downloadURL,
+          rating: parseInt(rating),
+          feedbackMessage,
+        };
 
-      // Add feedback to Firestore
-      await addFeedback(feedbackData);
+        // Add feedback to Firestore
+        await addFeedback(feedbackData);
 
-      // Reset form
-      feedbackForm.reset();
+        // Reset form
+        feedbackForm.reset();
 
-      // Hide the modal
-      $("#feedbackModal").modal("hide");
+        // Hide the modal if it exists
+        const modal = document.getElementById("feedbackModal");
+        if (modal && typeof $ !== 'undefined') {
+          $("#feedbackModal").modal("hide");
+        }
 
-      // Refresh the feedback carousel (if you have a function for it)
-      initializeFeedback(); // Optional if you are rendering feedback
-    } catch (error) {
-      console.error("Error uploading image: ", error);
-      showMessage(
-        "Failed to upload image and submit feedback.",
-        "feedbackMessage",
-        true
-      );
-    }
-  });
-} else {
-  console.error("Feedback form not found.");
-}
+        // Refresh the feedback carousel
+        initializeFeedback();
+        
+      } catch (error) {
+        console.error("Error uploading image: ", error);
+        showMessage("Failed to upload image and submit feedback.", "feedbackMessage", "error");
+      }
+    });
+  }
+});
 
 // Function to fetch feedback from Firestore
 async function fetchFeedback() {
@@ -295,12 +332,16 @@ export async function deleteFeedback(feedbackId) {
   }
 }
 
-
 // Function to render feedback in the carousel
-
 function renderFeedbackCarousel(feedbacks) {
   const carouselItems = document.getElementById("carouselItems");
-  carouselItems.innerHTML = ""; // Clear existing items
+  
+  if (!carouselItems) {
+    console.log("Carousel items element not found - skipping feedback rendering");
+    return;
+  }
+
+  carouselItems.innerHTML = "";
 
   if (feedbacks.length === 0) {
     carouselItems.innerHTML = `
@@ -315,60 +356,59 @@ function renderFeedbackCarousel(feedbacks) {
       const carouselItem = document.createElement("div");
       carouselItem.classList.add("carousel-item");
       if (index === 0) {
-        carouselItem.classList.add("active"); // Make the first item active
+        carouselItem.classList.add("active");
       }
 
-      // Generate star rating HTML based on feedback.rating
+      // Generate star rating HTML
       let starsHtml = "";
-      const rating = parseInt(feedback.rating, 10); // Ensure rating is an integer
+      const rating = parseInt(feedback.rating, 10);
 
       for (let i = 1; i <= 5; i++) {
-        starsHtml +=
-          i <= rating
-            ? `<span class="fa fa-star checked" style="color: gold;"></span>`
-            : `<span class="fa fa-star" style="color: lightgray;"></span>`; // Empty star for remaining
+        starsHtml += i <= rating
+          ? `<span class="fa fa-star checked" style="color: gold;"></span>`
+          : `<span class="fa fa-star" style="color: lightgray;"></span>`;
       }
 
-
-      // Create the HTML structure for each feedback item
       carouselItem.innerHTML = `
-      
         <div class="card" style="width:18rem">
           <div class="card-body">
-            <div className="cardTitle">
+            <div class="cardTitle">
               <div class="cardImg">
                 <img src="${feedback.userImage}" class="rounded-circle mb-3" alt="User Image">
                 <h5 class="card-title">${feedback.username}</h5>
               </div>
               <div class="cardStar mb-3">${starsHtml}</div>
-          </div>
-
-          <p class="card-text">${feedback.feedbackMessage}</p>
+            </div>
+            <p class="card-text">${feedback.feedbackMessage}</p>
           </div>
         </div>
-      
       `;
 
       carouselItems.appendChild(carouselItem);
     });
   }
 
-  // Reinitialize the carousel
-  $("#feedbackCarousel").carousel();
+  // Reinitialize the carousel if jQuery is available
+  if (typeof $ !== 'undefined') {
+    $("#feedbackCarousel").carousel();
+  }
 }
 
 // Function to initialize feedback carousel on page load
 async function initializeFeedback() {
-  const feedbacks = await fetchFeedback();
-  renderFeedbackCarousel(feedbacks);
+  // Only initialize if the carousel element exists
+  if (document.getElementById("carouselItems")) {
+    const feedbacks = await fetchFeedback();
+    renderFeedbackCarousel(feedbacks);
+  }
 }
 
-// Ensure DOM is fully loaded before initializing feedback
+// Initialize feedback when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
   initializeFeedback();
 });
 
-//Password
+// Password update functionality
 document.addEventListener("DOMContentLoaded", () => {
   const profileForm = document.getElementById("profileForm");
 
@@ -381,35 +421,27 @@ document.addEventListener("DOMContentLoaded", () => {
       const user = auth.currentUser;
 
       if (!user) {
-        showMessage("User is not signed in", "updatePasswordMessage", true);
+        showMessage("User is not signed in", "updatePasswordMessage", "error");
         return;
       }
 
-      const credential = EmailAuthProvider.credential(
-        user.email,
-        currentPassword
-      );
+      const credential = EmailAuthProvider.credential(user.email, currentPassword);
 
       try {
-        // Reauthenticate the user
         await reauthenticateWithCredential(user, credential);
-
-        // Update the password
         await updatePassword(user, newPassword);
-        showMessage("Password updated successfully!", "updatePasswordMessage");
-
-        // Optionally, clear the form
+        showMessage("Password updated successfully!", "updatePasswordMessage", "success");
         profileForm.reset();
       } catch (error) {
-        showMessage(`Error: ${error.message}`, "updatePasswordMessage", true);
+        showMessage(`Error: ${error.message}`, "updatePasswordMessage", "error");
       }
     });
   }
 });
 
-// Function to upload places to Firebase (existing functionality)
+// Function to upload places to Firebase
 export async function uploadPlacesToFirebase(places) {
-  places.forEach(async (place) => {
+  for (const place of places) {
     const placeData = {
       place_name: place.place_name,
       image_path: place.image_path,
@@ -421,20 +453,23 @@ export async function uploadPlacesToFirebase(places) {
     } catch (error) {
       console.error("Error adding document: ", error);
     }
-  });
+  }
 }
 
-// Function to fetch places from Firebase (existing functionality)
+// Function to fetch places from Firebase
 export async function fetchPlacesFromFirebase() {
-  const placesRef = collection(db, "places"); // 'places' is the Firestore collection name
-  const querySnapshot = await getDocs(placesRef);
-
-  const places = [];
-  querySnapshot.forEach((doc) => {
-    places.push(doc.data());
-  });
-
-  return places;
+  try {
+    const placesRef = collection(db, "places");
+    const querySnapshot = await getDocs(placesRef);
+    const places = [];
+    querySnapshot.forEach((doc) => {
+      places.push(doc.data());
+    });
+    return places;
+  } catch (error) {
+    console.error("Error fetching places: ", error);
+    return [];
+  }
 }
 
-export { db, storage };
+export { db, storage, auth };
