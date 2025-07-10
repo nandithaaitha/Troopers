@@ -14,28 +14,28 @@
       <form id="registrationForm" aria-describedby="signUpMessage">
         <div class="form-group">
           <label for="first-name">First Name</label>
-          <input type="text" id="first-name" name="first-name" required aria-required="true" />
+          <input type="text" id="first-name" name="first-name" required aria-required="true" autocomplete="given-name" />
         </div>
 
         <div class="form-group">
           <label for="last-name">Last Name</label>
-          <input type="text" id="last-name" name="last-name" required aria-required="true" />
+          <input type="text" id="last-name" name="last-name" required aria-required="true" autocomplete="family-name" />
         </div>
 
         <div class="form-group">
           <label for="email">Email Address</label>
-          <input type="email" id="email" name="email" required aria-required="true" />
+          <input type="email" id="email" name="email" required aria-required="true" autocomplete="email" />
         </div>
 
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" id="password" name="password" required aria-required="true" minlength="8" aria-describedby="passwordHelp" />
+          <input type="password" id="password" name="password" required aria-required="true" minlength="8" aria-describedby="passwordHelp" autocomplete="new-password" />
           <small id="passwordHelp">Password must be at least 8 characters long.</small>
         </div>
 
         <div class="form-group">
           <label for="dob">Date of Birth</label>
-          <input type="date" id="dob" name="dob" required aria-required="true" />
+          <input type="date" id="dob" name="dob" required aria-required="true" autocomplete="bday" />
         </div>
 
         <button type="submit" class="submit-btn">Register</button>
